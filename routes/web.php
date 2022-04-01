@@ -13,22 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//FRONT ONLY
-Route::get('/', function () {
-    return view('welcome');
-});
-
+//AUTH ROUTES
 Auth::routes(['verify' => true]);
 
 Route::get('/email/verify', function () {
     return view('auth.verify');
 })->middleware('auth')->name('verification.notice');
 
+//FRONT ONLY
+Route::get('/', function () {
+    return redirect()->route('home');
+});
+
+Route::get('/home', function () {
+    return view('frontend.home');
+})->name('home');
+
+Route::get('/about-us', function () {
+    return view('frontend.about');
+})->name('about-us');
 
 //CLIENT SIDE
 Route::group([
     'middleware' => ['verified'],
 ], function(){
-
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
