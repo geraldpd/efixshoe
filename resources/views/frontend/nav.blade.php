@@ -27,9 +27,9 @@
             </div>
             <div class="nav__list__wrapper">
                 <li><a class="nav__link" href="{{ route('home') }}">Home</a></li>
-                <li><a class="nav__link" href="#">Services</a></li>
+                <li><a class="nav__link" href="{{ route('services') }}">Services</a></li>
                 <li><a class="nav__link" href="{{ route('about-us') }}">About Us</a></li>
-                <li><a class="nav__link" href="#">FAQs</a></li>
+                <li><a class="nav__link" href="{{ route('faqs') }}">FAQs</a></li>
                 @guest
                     <li><a class="nav__link" href="{{ route('login') }}">Account</a></li>
                 @else

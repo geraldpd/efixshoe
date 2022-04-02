@@ -4,7 +4,7 @@
     <div class="footer__wrapper">
     <div class="footer__col2">
         <div class="footer__logo">
-        <img src="./images/logo.svg" alt="shaif's cuisine">
+        <img src="{{ asset('images/logo.svg') }}" alt="shaif's cuisine">
         </div>
         <p class="footer__desc">
         An Online Shoe Care and Services in Metro Vigan
@@ -54,13 +54,13 @@
             <a href="{{ route('home') }}">Home</a>
         </li>
         <li>
-            <a href="#">Services</a>
+            <a href="{{ route('services') }}">Services</a>
         </li>
         <li>
             <a href="{{ route('about-us') }}">About Us</a>
         </li>
         <li>
-            <a href="#">FAQs</a>
+            <a href="{{ route('faqs') }}">FAQs</a>
         </li>
         <li>
             <a href="#">Book A Service</a>

@@ -19,7 +19,7 @@
                         Never gonna tell a lie and hurt you
                     </p>
                     <div class="button__wrapper">
-                        <a href="#" class="btn primary-btn">Explore Services</a>
+                        <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
                         <a href="#" class="btn">Book A Service</a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
             <div class="hero__right" data-aos="fade-right">
 
                 <div class="container">
-                    <p>Already have an account? <a href="{{ route('login') }}">sign in</a></p>
+                    <p>Already have an account? <a href="{{ route('login') }}">Sign In</a></p>
                 </div>
 
                 <section id="form">
@@ -48,7 +48,7 @@
                                     <input id="first_name" type="first_name" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
 
                                     @error('first_name')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -57,7 +57,7 @@
                                     <input id="last_name" type="last_name" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
 
                                     @error('last_name')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -66,7 +66,7 @@
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -75,7 +75,7 @@
                                     <input id="contact_number" type="text" placeholder="09 *** *** ***" maxlength="11" name="contact_number" value="{{ old('contact_number') }}" required autocomplete="contact_number">
 
                                     @error('contact_number')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -84,7 +84,7 @@
                                     <textarea id="address_1" name="address_1" required autofocus>{{ old('address_1') }}</textarea>
 
                                     @error('address_1')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -93,7 +93,7 @@
                                     <textarea id="address_2" name="address_2" required autofocus>{{ old('address_1') }}</textarea>
 
                                     @error('address_2')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -102,7 +102,7 @@
                                     <input id="password" type="password" name="password" required autocomplete="current-password">
 
                                     @error('password')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -112,7 +112,7 @@
                                 </div>
 
                                 <button type="submit" class="btn primary-btn">
-                                    {{ __('register') }}
+                                    {{ __('Register') }}
                                 </button>
 
                             </form>
