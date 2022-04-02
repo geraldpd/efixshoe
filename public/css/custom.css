@@ -1,0 +1,135 @@
+/* page title styles */
+#page__title {
+	padding-top: 3rem;
+	padding-bottom: 2rem;
+}
+.page__title__text {
+	font-size: 2.2rem;
+	color: var(--black-1);
+}
+@media only screen and (min-width: 768px) {
+	#page__title {
+		padding-top: 5rem;
+		padding-bottom: 3rem;
+	}
+	.page__title__text {
+		font-size: 3.6rem;
+	}
+}
+/* Our Specials Menu Styles */
+#ourServices {
+	padding: 0;
+}
+.ourServices__title {
+	font-size: 1.8rem;
+	color: var(--black-1);
+	margin-bottom: 2rem;
+}
+.ourServices__wrapper {
+	display: flex;
+	gap: 1.5rem;
+	flex-direction: column;
+	max-width: 400px;
+    margin-bottom: 50px;
+}
+.ourServices__item {
+	flex: 1;
+	display: flex;
+	gap: 2rem;
+	background-color: var(--lightGreen-1);
+	padding: 1.5rem;
+	border-radius: 12px;
+    max-height: 400px;
+}
+.faq-item {
+	background-color: var(--lightGreen-1);
+	padding: 1.5rem;
+}
+.ourServices__item__img,
+.ourServices__item__info {
+	flex: 1;
+}
+.ourServices__item__img {
+	border-radius: 12px;
+	overflow: hidden;
+}
+.ourServices__item__img img {
+	object-fit: cover;
+}
+.ourServices__item__title {
+	font-size: 2.4rem;
+	font-weight: 500;
+	margin-bottom: 1rem;
+	color: var(--black-1);
+	line-height: 1.2em;
+}
+.ourServices__item__subtitle {
+	font-size: 1.6rem;
+	font-weight: 100;
+	margin-bottom: 1rem;
+	color: var(--black-1);
+	line-height: 1.2em;
+}
+.ourServices__item__price {
+	font-size: 1.8rem;
+	color: var(--green-1);
+	font-weight: 600;
+	margin-bottom: 1rem;
+}
+.ourServices__item__stars {
+	width: max-content;
+}
+.ourServices__item__text {
+    margin-top: 1rem;
+	font-size: 1.4rem;
+	color: var(--black-2);
+	font-weight: 500;
+}
+@media only screen and (min-width: 768px) {
+	.ourServices__title {
+		font-size: 2.4rem;
+	}
+	.ourServices__wrapper {
+		flex-direction: column;
+		gap: 2rem;
+		max-width: none;
+	}
+	.ourServices__item {
+		padding: 3rem;
+		gap: 2rem;
+	}
+    .faq-item {
+		padding: 3rem;
+	}
+	.ourServices__item__title {
+		font-size: 3rem;
+		margin-bottom: 1.5rem;
+	}
+    .ourServices__item__subtitle {
+        font-size: 2rem;
+		margin-bottom: 1.5rem;
+    }
+	.ourServices__item__price {
+		font-size: 2.4rem;
+		margin-bottom: 1.5rem;
+	}
+    .ourServices__item__text {
+        font-size: 1.6rem;
+    }
+}
+@media only screen and (min-width: 1100px) {
+	.ourServices__item__img {
+		flex: 4;
+	}
+	.ourServices__item__info {
+		flex: 3;
+	}
+}
+
+/* Dish Grid Styles */
+#dishGrid {
+	padding-bottom: 0;
+}
+#dishGrid:last-of-type {
+	padding-bottom: 10rem;
+}

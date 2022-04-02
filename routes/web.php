@@ -29,6 +29,14 @@ Route::get('/home', function () {
     return view('frontend.home');
 })->name('home');
 
+Route::get('/services', function () {
+    return view('frontend.services');
+})->name('services');
+
+Route::get('/faqs', function () {
+    return view('frontend.faqs');
+})->name('faqs');
+
 Route::get('/about-us', function () {
     return view('frontend.about');
 })->name('about-us');

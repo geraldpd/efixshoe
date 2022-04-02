@@ -19,7 +19,7 @@
                         Never gonna tell a lie and hurt you
                     </p>
                     <div class="button__wrapper">
-                        <a href="#" class="btn primary-btn">Explore Services</a>
+                        <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
                         <a href="#" class="btn">Book A Service</a>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
             <div class="hero__right" data-aos="fade-right">
 
                 <div class="container">
-                    <p>Don't have an account yet? <a href="{{ route('register') }}">sign up</a></p>
+                    <p>Don't have an account yet? <a href="{{ route('register') }}">Sign Up</a></p>
                 </div>
 
                 <section id="form">
@@ -48,7 +48,7 @@
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
-                                        <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -57,7 +57,7 @@
                                     <input id="password" type="password" name="password" required autocomplete="current-password">
 
                                     @error('password')
-                                        <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 

@@ -13,7 +13,7 @@
                     <p class="hero__info">Lorem Ipsum Dolor
                     </p>
                     <div class="button__wrapper">
-                        <a href="#" class="btn primary-btn">Explore Services</a>
+                        <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
                         <a href="#" class="btn">Book A Service</a>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
             <div class="hero__right" data-aos="fade-right">
 
                 <div class="container">
-                    <p>Return to <a href="{{ route('login') }}">sign in</a></p>
+                    <p>Return to <a href="{{ route('login') }}">Sign In</a></p>
                 </div>
 
                 <section id="form">
@@ -42,7 +42,7 @@
                                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                     @error('email')
-                                    <p><strong>{{ $message }}</strong></p>
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
 
@@ -54,9 +54,9 @@
                         </div>
 
                         @if (session('status'))
-                        <div data-aos="fade-up">
-                            <h3 class="form__title">We have emailed your password reset link!</h3>
-                        </div>
+                            <div data-aos="fade-up">
+                                <h3 class="form__title">We have emailed your password reset link!</h3>
+                            </div>
                         @endif
                     </div>
                 </section>

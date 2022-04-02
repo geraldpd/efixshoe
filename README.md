@@ -2,10 +2,11 @@
 An Online Shoe Care and Services in Metro Vigan
 
 ## Pages
-- [ ] Home Page
-- [ ] Services
-- [ ] About Us
-- [ ] Account (Login/Register)
+- [x] Home Page
+- [x] Services
+- [x] About Us
+- [x] FAQs
+- [x] Account (Login/Register)
 - [ ] Book A Service
 
 ## Client Modules

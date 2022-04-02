@@ -42,6 +42,9 @@ h3,
 h4 {
 	font-family: Poppins;
 }
+.error-message {
+    color: #dc3545 !important;
+}
 p {
 	font-family: Raleway;
 	font-weight: 400;
