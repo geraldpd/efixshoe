@@ -1,47 +1,69 @@
-@extends('layouts.app')
+@extends('layouts.frontend.auth')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<!-- Hero Section -->
+<section id="hero">
+    <div class="container">
+        <div class="hero__wrapper">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            <div class="hero__left" data-aos="fade-left">
+                <div class="hero__left__wrapper">
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
+                    <p class="hero__info">Lorem Ipsum Dolor
+                    </p>
+                    <div class="button__wrapper">
+                        <a href="#" class="btn primary-btn">Explore Services</a>
+                        <a href="#" class="btn">Book A Service</a>
+                    </div>
                 </div>
             </div>
+
+            <div class="hero__right" data-aos="fade-right">
+
+                <div class="container">
+                    <p>Return to <a href="{{ route('login') }}">sign in</a></p>
+                </div>
+
+                <section id="form">
+                    <div class="container">
+
+                        <h3 class="form__title">
+                            Reset Password
+                        </h3>
+
+                        <div class="form__wrapper">
+
+                            <form method="POST" action="{{ route('password.email') }}" netlify>
+                                @csrf
+
+                                <div class="form__group form__group__full">
+                                    <label for="email">{{ __('Email') }}</label>
+                                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                    @error('email')
+                                    <p><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn primary-btn">
+                                    {{ __('Send Password Reset Link') }}
+                                </button>
+                            </form>
+
+                        </div>
+
+                        @if (session('status'))
+                        <div data-aos="fade-up">
+                            <h3 class="form__title">We have emailed your password reset link!</h3>
+                        </div>
+                        @endif
+                    </div>
+                </section>
+            </div>
+
         </div>
     </div>
-</div>
+</section>
+<!-- End Hero Section -->
 @endsection
