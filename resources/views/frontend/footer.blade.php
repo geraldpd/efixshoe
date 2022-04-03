@@ -79,7 +79,7 @@
             <a href="#">efixshoe@gmail.com</a>
         </li>
         <li>
-            <a href="#">123 Street, Sample, Philippines</a>
+            <a href="#">Cabangaran, Santa, Ilocos Sur, Philippines</a>
         </li>
         </ol>
     </div>

@@ -1,8 +1,16 @@
 @extends('layouts.frontend.main')
 
 @section('content')
+<section id="page__title" data-aos="fade-up">
+    <div class="container">
+        <h2 class="page__title__text">
+            This page is under construction.
+        </h2>
+    </div>
+</section>
+
 <!-- Hero Section -->
-<section id="hero">
+{{--  <section id="hero">
     <div class="container">
         <div class="hero__wrapper">
         <div class="hero__left" data-aos="fade-left">
@@ -25,6 +33,6 @@
         </div>
         </div>
     </div>
-</section>
+</section>  --}}
 <!-- End Hero Section -->
 @endsection

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="nav__wrapper">
         <a href="{{ route('home') }}" class="logo">
-            <img src="./images/logo.svg" alt="eFixShoe Logo">
+            <img src="{{ asset('images/logo.svg') }}" alt="eFixShoe Logo">
         </a>
         <nav>
             <div class="nav__icon">

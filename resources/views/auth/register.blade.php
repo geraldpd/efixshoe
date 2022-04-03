@@ -11,12 +11,7 @@
 
                     <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
                     <p class="hero__info">
-                        Never gonna give you up
-                        Never gonna let you down
-                        Never gonna run around and desert you
-                        Never gonna make you cry
-                        Never gonna say goodbye
-                        Never gonna tell a lie and hurt you
+                        Some content
                     </p>
                     <div class="button__wrapper">
                         <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>

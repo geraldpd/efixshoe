@@ -5,12 +5,12 @@
 <section id="page__title" data-aos="fade-up">
     <div class="container">
         <h2 class="page__title__text">
-            FAQs
+            This page is under construction.
         </h2>
     </div>
 </section>
 
-<section id="ourServices" data-aos="fade-up">
+{{--  <section id="ourServices" data-aos="fade-up">
     <div class="container">
         <div class="ourServices__wrapper">
             <div class="faq-item">
@@ -47,5 +47,5 @@
             </div>
         </div>
     </div>
-</section>
+</section>  --}}
 @endsection

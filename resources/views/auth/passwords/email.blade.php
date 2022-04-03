@@ -10,7 +10,8 @@
                 <div class="hero__left__wrapper">
 
                     <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
-                    <p class="hero__info">Lorem Ipsum Dolor
+                    <p class="hero__info">
+                        Some content
                     </p>
                     <div class="button__wrapper">
                         <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
