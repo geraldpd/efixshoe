@@ -40,10 +40,3 @@ Route::get('/faqs', function () {
 Route::get('/about-us', function () {
     return view('frontend.about');
 })->name('about-us');
-
-//CLIENT SIDE
-Route::group([
-    'middleware' => ['verified'],
-], function(){
-    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});

@@ -77,11 +77,11 @@
         </div>
     </div>
 
-    @yield('content')
+        @yield('content')
 
-    @include('frontend.footer')
+        @include('frontend.footer')
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-</body>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+    </body>
 </html>
