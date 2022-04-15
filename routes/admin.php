@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['register' => false]);
-
 Route::group([
-    'middleware' => ['admin', 'verified'],
+    'namespace' => 'Admin',
 ], function(){
 
-    Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+    Auth::routes(['register' => false]);
 
+    Route::group([
+        'middleware' => ['admin', 'verified'],
+    ], function(){
+
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+
+        Route::resource('services', ServiceController::class);
+
+    });
 });
+
