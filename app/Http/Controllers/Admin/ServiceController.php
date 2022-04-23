@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\Service\{
+    StoreRequest,
+    UpdateRequest
+};
 
 class ServiceController extends Controller
 {
@@ -26,18 +30,20 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.services.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Service  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $service = Service::create($request->validated());
+
+        return redirect()->route('admin.services.show', [$service])->with('message', 'Service Successfully Created');
     }
 
     /**
@@ -48,7 +54,7 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        //
+        return view('admin.services.show', compact('service'));
     }
 
     /**
@@ -59,19 +65,27 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
-        //
+        return view('admin.services.edit', compact('service'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Service  $request
      * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(UpdateRequest $request, Service $service)
     {
-        //
+        $data = $request->validated();
+
+        if(! $request->has('is_active')) {
+            $data['is_active'] = 0;
+        }
+
+        $service->update($data);
+
+        return redirect()->route('admin.services.show', [$service])->with('message', 'Service Successfully Updated');
     }
 
     /**
