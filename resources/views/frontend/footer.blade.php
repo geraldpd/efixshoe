@@ -4,7 +4,7 @@
     <div class="footer__wrapper">
     <div class="footer__col2">
         <div class="footer__logo">
-        <img src="{{ asset('images/logo.svg') }}" alt="shaif's cuisine">
+            <img src="{{ asset('images/logo.png') }}" alt="eFixShoe Logo">
         </div>
         <p class="footer__desc">
         An Online Shoe Care and Services in Metro Vigan

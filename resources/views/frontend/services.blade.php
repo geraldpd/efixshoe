@@ -16,7 +16,7 @@
         <div class="ourServices__wrapper">
             <div class="ourServices__item">
                 <div class="ourServices__item__img">
-                <img src="https://via.placeholder.com/1920x1440.png?text=IMG" alt="deep clean img">
+                    <img src="{{ asset('images/deepclean.png') }}" alt="deep clean img">
                 </div>
                 <div class="ourServices__item__info">
                 <h3 class="ourServices__item__title">
@@ -30,7 +30,7 @@
             </div>
             <div class="ourServices__item">
                 <div class="ourServices__item__img">
-                <img src="https://via.placeholder.com/1920x1440.png?text=IMG" alt="unyellowing img">
+                    <img src="{{ asset('images/unyellowing.jpg') }}" alt="unyellowing img">
                 </div>
                 <div class="ourServices__item__info">
                 <h3 class="ourServices__item__title">
@@ -44,7 +44,7 @@
             </div>
             <div class="ourServices__item">
                 <div class="ourServices__item__img">
-                <img src="https://via.placeholder.com/1920x1440.png?text=IMG" alt="reglue img">
+                    <img src="{{ asset('images/reglue.jpg') }}" alt="reglue img">
                 </div>
                 <div class="ourServices__item__info">
                 <h3 class="ourServices__item__title">
@@ -58,7 +58,7 @@
             </div>
             <div class="ourServices__item">
                 <div class="ourServices__item__img">
-                <img src="https://via.placeholder.com/1920x1440.png?text=IMG" alt="restitch img">
+                    <img src="{{ asset('images/restitch.jpg') }}" alt="restitch img">
                 </div>
                 <div class="ourServices__item__info">
                 <h3 class="ourServices__item__title">
@@ -72,7 +72,7 @@
             </div>
             <div class="ourServices__item">
                 <div class="ourServices__item__img">
-                <img src="https://via.placeholder.com/1920x1440.png?text=IMG" alt="restore img">
+                    <img src="{{ asset('images/restoration.png') }}" alt="restore img">
                 </div>
                 <div class="ourServices__item__info">
                 <h3 class="ourServices__item__title">
