@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'name' => ['required', 'unique:services,id'],
             'description' => ['required'],
             'cost' => ['required', 'numeric', 'max:99999'],
+            'turnaround_time' => ['required', 'numeric'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }

@@ -27,7 +27,8 @@ class StoreRequest extends FormRequest
         return [
             'name' => ['required', 'unique:services'],
             'description' => ['required'],
-            'cost' => ['required', 'numeric', 'max:99999'],
+            'turnaround_time' => ['required', 'numeric'],
+            'cost' => ['required', 'numeric', 'max:99999']
         ];
     }
 }

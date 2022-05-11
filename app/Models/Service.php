@@ -18,6 +18,7 @@ class Service extends Model
         'name',
         'description',
         'cost',
+        'turnaround_time',
         'is_active'
     ];
 }

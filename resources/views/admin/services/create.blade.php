@@ -44,15 +44,17 @@
 
                 <br>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" class="form-control" id="description" placeholder="Description" rows="10">{{ old('description') }}</textarea>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="description">Description</label>
+                        <textarea name="description" class="form-control" id="description" placeholder="Description" rows="10">{{ old('description') }}</textarea>
 
-                    @if ($errors->has('description'))
-                        <small class="help-block text-danger">
-                            <strong>{{ $errors->first('description') }}</strong>
-                        </small>
-                    @endif
+                        @if ($errors->has('description'))
+                            <small class="help-block text-danger">
+                                <strong>{{ $errors->first('description') }}</strong>
+                            </small>
+                        @endif
+                    </div>
                 </div>
 
                 <br>
