@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Service;
+namespace App\Http\Requests\PaymentMethod;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,10 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:services,'.$this->service->id],
-            'description' => ['required'],
-            'cost' => ['required', 'numeric', 'max:99999'],
-            'turnaround_time' => ['required', 'numeric'],
-            'is_active' => ['nullable', 'boolean'],
+            'name' => ['required', 'unique:payment_methods'],
+            'account_name' => ['required'],
+            'account_number' => ['required'],
+            'image' => ['nullable']
         ];
     }
 }

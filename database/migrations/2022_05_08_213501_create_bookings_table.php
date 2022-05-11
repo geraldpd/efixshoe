@@ -18,8 +18,8 @@ class CreateBookingsTable extends Migration
             $table->foreignId('user_id')->constrained();
             //$table->foreignId('payment_detail_id')->constrained();
             $table->string('status');
-            $table->timestamp('pickup_date')->comment('date to which the shoes will be picked up from the client');
-            $table->timestamp('delivery_date')->comment('date to which the shoes will be delivered to the client');
+            $table->timestamp('pickup_date')->nullable()->default(null)->comment('date to which the shoes will be picked up from the client');
+            $table->timestamp('delivery_date')->nullable()->default(null)->comment('date to which the shoes will be delivered to the client');
             $table->timestamps();
         });
     }

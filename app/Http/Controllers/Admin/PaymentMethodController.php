@@ -1,9 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use App\Http\Requests\PaymentMethod\{
+    StoreRequest,
+    UpdateRequest
+};
 
 class PaymentMethodController extends Controller
 {
@@ -14,7 +18,9 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
-        //
+        $payment_methods = PaymentMethod::paginate(15);
+
+        return view('admin.payment_methods.index', compact('payment_methods'));
     }
 
     /**
@@ -24,7 +30,7 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.payment_methods.create');
     }
 
     /**
@@ -33,9 +39,11 @@ class PaymentMethodController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        $payment_method = PaymentMethod::create($request->validated());
+
+        return redirect()->route('admin.payment_methods.show', [$payment_method])->with('message', 'Payment Method Successfully Created');
     }
 
     /**
@@ -44,9 +52,9 @@ class PaymentMethodController extends Controller
      * @param  \App\Models\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function show(PaymentMethod $paymentMethod)
+    public function show(PaymentMethod $payment_method)
     {
-        //
+        return view('admin.payment_methods.show', compact('payment_method'));
     }
 
     /**
@@ -55,9 +63,9 @@ class PaymentMethodController extends Controller
      * @param  \App\Models\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function edit(PaymentMethod $paymentMethod)
+    public function edit(PaymentMethod $payment_method)
     {
-        //
+        return view('admin.payment_methods.edit', compact('payment_method'));
     }
 
     /**
@@ -67,9 +75,17 @@ class PaymentMethodController extends Controller
      * @param  \App\Models\PaymentMethod  $paymentMethod
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PaymentMethod $paymentMethod)
+    public function update(UpdateRequest $request, PaymentMethod $payment_method)
     {
-        //
+        $data = $request->validated();
+
+        if(! $request->has('is_active')) {
+            $data['is_active'] = 0;
+        }
+
+        $payment_method->update($data);
+
+        return redirect()->route('admin.payment_methods.show', [$payment_method])->with('message', 'Payment Method Successfully Updated');
     }
 
     /**
