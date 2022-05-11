@@ -19,7 +19,7 @@ An Online Shoe Care and Services in Metro Vigan
 - [ ] Customer Feedback
 
 ## Admin Modules
-- [ ] Login
+- [x] Login
 - [ ] User/Staff Management
 - [ ] Service Management (Active/Disabled services & Availabilities)
 - [ ] Bookings (List)
