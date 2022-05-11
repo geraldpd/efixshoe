@@ -18,9 +18,10 @@ class CreateVouchersTable extends Migration
             $table->string('code');
             $table->foreignId('service_id')->nullable()->constrained()->comment('to tie this voucher to specif service only');
             $table->integer('batch')->comment('for easier identification of voucher batches');
-            $table->boolean('is_used');
-            $table->timestamp('expiry_date');
+            $table->boolean('is_used')->default(false);
+            $table->timestamp('expiry_date')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

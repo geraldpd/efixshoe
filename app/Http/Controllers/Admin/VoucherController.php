@@ -1,9 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use App\Services\VoucherService;
+use App\Http\Requests\Voucher\{
+    StoreRequest,
+    UpdateRequest
+};
+use App\Models\Service;
+use Carbon\Carbon;
 
 class VoucherController extends Controller
 {
@@ -14,7 +21,9 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        //
+        $vouchers = Voucher::orderBy('created_at', 'desc')->paginate(20);
+
+        return view('admin.vouchers.index', compact('vouchers'));
     }
 
     /**
@@ -24,7 +33,9 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        //
+        $services = Service::whereIsActive(true)->get();
+
+        return view('admin.vouchers.create', compact('services'));
     }
 
     /**
@@ -33,9 +44,26 @@ class VoucherController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+
+        $vouchers = [];
+        $codes = VoucherService::generateCode($request->count, $request->prefix);
+        $batch = Voucher::latest()->first()?->batch ?? 0;
+
+        foreach($codes as $code) {
+            $vouchers[] = [
+                'code' => $code,
+                'service_id' => $request->service_id,
+                'batch' => $batch + 1,
+                'is_used' => false,
+                'expiry_date' => Carbon::parse($request->expiry_date),
+            ];
+        }
+
+        Voucher::insert($vouchers);
+
+        return redirect()->route('admin.vouchers.index')->with('message', 'Voucher(s) Successfully Created');
     }
 
     /**

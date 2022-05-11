@@ -28,6 +28,7 @@ Route::group([
 
         Route::resource('services', ServiceController::class);
         Route::resource('payment_methods', PaymentMethodController::class);
+        Route::resource('vouchers', VoucherController::class);
 
     });
 });
