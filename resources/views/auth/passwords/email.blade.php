@@ -11,7 +11,8 @@
 
                     <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
                     <p class="hero__info">
-                        Some content
+                        Providing shoe cleaning has never been a new notion, but the idea behind "Clean Steps" is to take it to the next level, "One Step Above," where people can be amazed by the results.
+                        We hand wash your shoes making sure that every dirt is taken care of. We brush 'em, soap 'em clean because we value your time. Contact us, and we will pick them up and get them delivered within Metro Vigan.
                     </p>
                     <div class="button__wrapper">
                         <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
