@@ -1,72 +1,56 @@
 @extends('layouts.frontend.main')
 
 @section('content')
-<section id="page__title" data-aos="fade-up">
-    <div class="container">
-        <h2 class="page__title__text">
-            This page is under construction.
-        </h2>
-    </div>
-</section>
-
 <!-- Our Story Section -->
-{{--  <section id="ourStory" data-aos="fade-up">
+<section id="ourStory" data-aos="fade-up">
   <div class="container">
     <div class="ourStory__wrapper">
 
       <div class="ourStory__img">
-        <img src="{{ asset('images/ourStoryImg.png') }}" alt="shaif's cuisine">
+          <img src="{{ asset('images/restitch.jpg') }}" alt="restitch img">
       </div>
       <div class="ourStory__info">
         <h3 class="ourStory__title">
-          Our Story
+          About Us
         </h3>
-        <p class="ourStory__subtitle">
-          It's all started since 1998
-        </p>
         <p class="ourStory__text">
-          Welcome to Shaif's Cuisine. We take pride in delivering warm, friendly service and creating mouth-watering
-          culinary delights for all. Using only the freshest locally sourced ingredients, we’ll ensure you have a
-          dining
-          experience to remember.
-          <br><br>
-          Since 1998, we are the perfect place for a romantic meal for two, a catch-up with friends, family parties,
-          business meetings, and bringing loved ones together. With comfortable surroundings, affordable prices, and
-          seating for up to 65 guests, we can cater for all occasions.
+            Efixshoe, was created with the idea that, just like your clothes, your shoes need to be kept clean and shiny as new. After all, you buy expensive, high-quality clothes and dry-clean them frequently. But what about sneakers or leather shoes? Don't you require shoes that are as good as new and look amazing with your excellent, contemporary outfits?
+            <br><br>
+            Efixshoe was born as a result of this understanding. Efixshoe offers a full range of cleaning and laundry services for both sports and leather shoes
+            <br><br>
+            Providing shoe cleaning has never been a new notion, but the idea behind "Clean Steps" is to take it to the next level, "One Step Above," where people can be amazed by the results.
         </p>
       </div>
     </div>
   </div>
-</section>  --}}
+</section>
 <!-- End Our Story Section -->
 
 <!-- Our Goals -->
-{{--  <section id="ourGoals" data-aos="fade-down">
+<section id="ourGoals" data-aos="fade-down">
   <div class="container">
     <div class="ourGoals__info">
       <h3 class="ourGoals__title">
-        Our Goals
+          Have your shoes washed and cleaned with the best.
       </h3>
       <p class="ourGoals__text">
-        We shall sell delicious and remarkable food and beverages that meet the highest quality, freshness, and
-        seasonality criteria while combining modern-creative and classic cooking traditions. By showcasing warmth,
-        graciousness, efficiency, skill, professionalism, and integrity in our work, we will continually serve our
-        consumers with exceptional service. To have every customer who comes through our doors leave impressed by
-        their experience at Shaif's Cuisine and excited to come back again.
+          We handle all types of shoe cleaning.
+          We hand wash your shoes making sure that every dirt is taken care of. We brush 'em, soap 'em clean because we value your time. Contact us, and we will pick them up and get them delivered within Metro Vigan.
+          There are free pick-up and drop-off services available.
       </p>
     </div>
     <div class="ourGoals__imgs__wrapper" data-aos="fade-up">
       <div class="ourGoals__img1">
-        <img src="{{ asset('images/ourGoals_img1.png') }}" alt="kitchen img">
+        <img src="{{ asset('images/deepclean.png') }}" alt="deepclean img">
       </div>
       <div class="ourGoals__img2">
-        <img src="{{ asset('images/ourGoals_img2.png') }}" alt="kitchen img">
+          <img src="{{ asset('images/reglue.jpg') }}" alt="reglue img">
       </div>
       <div class="ourGoals__img3">
-        <img src="{{ asset('images/ourGoals_img3.png') }}" alt="kitchen img">
+          <img src="{{ asset('images/restoration.png') }}" alt="restore img">
       </div>
     </div>
   </div>
-</section>  --}}
+</section>
 <!-- End Our Goals -->
 @endsection

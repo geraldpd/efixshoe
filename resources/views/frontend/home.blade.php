@@ -1,38 +1,31 @@
 @extends('layouts.frontend.main')
 
 @section('content')
-<section id="page__title" data-aos="fade-up">
-    <div class="container">
-        <h2 class="page__title__text">
-            This page is under construction.
-        </h2>
-    </div>
-</section>
 
-<!-- Hero Section -->
-{{--  <section id="hero">
-    <div class="container">
-        <div class="hero__wrapper">
-        <div class="hero__left" data-aos="fade-left">
-            <div class="hero__left__wrapper">
 
-            <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
-            <p class="hero__info">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <div class="button__wrapper">
-                <a href="#" class="btn primary-btn">Explore Services</a>
-                <a href="#" class="btn">Book A Service</a>
+    <section id="hero">
+        <div class="container">
+            <div class="hero__wrapper">
+            <div class="hero__left" data-aos="fade-left">
+                <div class="hero__left__wrapper">
+
+                <h1 class="hero__heading">eFixShoe: An Online Shoe Care and Services in Metro Vigan</h1>
+                <p class="hero__info">
+                    Providing shoe cleaning has never been a new notion, but the idea behind "Clean Steps" is to take it to the next level, "One Step Above," where people can be amazed by the results.
+                    We hand wash your shoes making sure that every dirt is taken care of. We brush 'em, soap 'em clean because we value your time. Contact us, and we will pick them up and get them delivered within Metro Vigan.
+                </p>
+                <div class="button__wrapper">
+                    <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
+                    <a href="{{ route('booking') }}" class="btn">Book A Service</a>
+                </div>
+                </div>
+            </div>
+            <div class="hero__right" data-aos="fade-right">
+                <div class="hero__imgWrapper">
+                <img src="{{ asset('images/logo.png') }}">
+                </div>
             </div>
             </div>
         </div>
-        <div class="hero__right" data-aos="fade-right">
-            <div class="hero__imgWrapper">
-            <img src="{{ asset('images/heroImg.png') }}">
-            </div>
-        </div>
-        </div>
-    </div>
-</section>  --}}
-<!-- End Hero Section -->
+    </section>
 @endsection

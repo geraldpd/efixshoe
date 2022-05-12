@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Customer\Controller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,3 +41,9 @@ Route::get('/faqs', function () {
 Route::get('/about-us', function () {
     return view('frontend.about');
 })->name('about-us');
+
+//CUSTOMER ROUTES
+Route::group(['middleware' => 'customer'], function () {
+    Route::get('/booking', [Controller::class, 'index'])->name('booking');
+    Route::post('/add-to-cart', [Controller::class, 'addToCart'])->name('cart.store');
+});

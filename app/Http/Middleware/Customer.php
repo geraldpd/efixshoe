@@ -19,7 +19,7 @@ class Customer
     {
         if (!Auth::check())
         {
-            return redirect()->route('auth.login');
+            return redirect()->route('login');
         }
 
         $role_id = Auth::user()->roles->first()->id;
