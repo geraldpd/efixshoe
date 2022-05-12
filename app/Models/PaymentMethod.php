@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class PaymentMethod extends Model
 {
     use HasFactory;
 
@@ -16,9 +16,9 @@ class Service extends Model
      */
     protected $fillable = [
         'name',
-        'description',
-        'cost',
-        'turnaround_time',
-        'is_active'
+        'account_name',
+        'account_number',
+        'image',
+        'is_active',
     ];
 }

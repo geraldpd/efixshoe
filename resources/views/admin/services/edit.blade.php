@@ -45,6 +45,21 @@
 
                 <br>
 
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="turnaround_time">Turnaround Time</label>
+                        <input name="turnaround_time" type="number" min="1" max="7" class="form-control" id="turnaround_time" value="{{ $service->turnaround_time ?? old('turnaround_time') }}" title="The number of days this service will take to finish">
+
+                        @if ($errors->has('turnaround_time'))
+                        <small class="help-block text-danger">
+                            <strong>{{ $errors->first('turnaround_time') }}</strong>
+                        </small>
+                        @endif
+                    </div>
+                </div>
+
+                <br>
+
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea name="description" class="form-control" id="description" placeholder="Description" rows="10">{{ $service->description ?? old('description') }}</textarea>

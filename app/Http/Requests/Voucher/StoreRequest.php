@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Service;
+namespace App\Http\Requests\Voucher;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +25,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:services'],
-            'description' => ['required'],
-            'turnaround_time' => ['required', 'numeric'],
-            'cost' => ['required', 'numeric', 'max:99999']
+            'service_id' => ['nullable', 'exists:services,id'],
+            'prefix' => ['nullable'],
+            'is_used' => ['boolean'],
+            'count' => ['required', 'min:1', 'max:1000'],
+            'expiry_date' => ['nullable', 'date']
         ];
     }
 }

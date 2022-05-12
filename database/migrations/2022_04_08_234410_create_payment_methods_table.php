@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateServicesTable extends Migration
+class CreatePaymentMethodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->decimal('cost', 6, 2);
-            $table->integer('turnaround_time')->default(1)->comment('number of days a service will take');
+            $table->string('name');//cash, gcash,ing
+            $table->text('account_name');
+            $table->text('account_number');
+            $table->text('image')->nullable()->comment('screenshot/image of the online payment account');
             $table->boolean('is_active')->default(true);
-            $table->text('image')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateServicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('payment_methods');
     }
 }

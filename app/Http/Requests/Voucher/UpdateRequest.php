@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Service;
+namespace App\Http\Requests\Voucher;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,11 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:services'],
+            'code' => ['required', 'unique:voucers,code'.$this->voucher->id],
             'description' => ['required'],
+            'cost' => ['required', 'numeric', 'max:99999'],
             'turnaround_time' => ['required', 'numeric'],
-            'cost' => ['required', 'numeric', 'max:99999']
+            'is_active' => ['nullable', 'boolean'],
         ];
     }
 }

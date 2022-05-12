@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Service;
+namespace App\Http\Requests\PaymentMethod;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +25,10 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:services'],
-            'description' => ['required'],
-            'turnaround_time' => ['required', 'numeric'],
-            'cost' => ['required', 'numeric', 'max:99999']
+            'name' => ['required', 'unique:payment_methods'],
+            'account_name' => ['required'],
+            'account_number' => ['required'],
+            'image' => ['nullable']
         ];
     }
 }
