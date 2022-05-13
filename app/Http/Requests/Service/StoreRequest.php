@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             'name' => ['required', 'unique:services'],
             'description' => ['required'],
             'turnaround_time' => ['required', 'numeric'],
-            'cost' => ['required', 'numeric', 'max:99999']
+            'cost' => ['required', 'numeric', 'max:99999'],
+            'image' => ['mimes:jpg,jpeg,png,bmp,tiff', 'file', 'max:5120'],
         ];
     }
 }

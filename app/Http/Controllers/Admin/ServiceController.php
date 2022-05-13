@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Service;
-use Illuminate\Http\Request;
 use App\Http\Requests\Service\{
     StoreRequest,
     UpdateRequest
 };
-
+use App\Models\Service;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 class ServiceController extends Controller
 {
     /**
@@ -41,7 +41,20 @@ class ServiceController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $service = Service::create($request->validated());
+        $service = Service::create($request->except('image'));
+
+        if($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+
+            Storage::putFileAs(
+                'public/services', $image, $service->id.'.'.$extension
+            );
+
+            $service->image = $service->id.'.'.$extension;
+            $service->save();
+        }
 
         return redirect()->route('admin.services.show', [$service])->with('message', 'Service Successfully Created');
     }
@@ -77,10 +90,22 @@ class ServiceController extends Controller
      */
     public function update(UpdateRequest $request, Service $service)
     {
-        $data = $request->validated();
+        $data = $request->except('image');
 
         if(! $request->has('is_active')) {
             $data['is_active'] = 0;
+        }
+
+        if($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+
+            Storage::putFileAs(
+                'public/services', $image, $service->id.'.'.$extension
+            );
+
+            $service->image = $service->id.'.'.$extension;
         }
 
         $service->update($data);

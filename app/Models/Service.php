@@ -19,6 +19,12 @@ class Service extends Model
         'description',
         'cost',
         'turnaround_time',
-        'is_active'
+        'image',
+        'is_active',
     ];
+
+    public function getImageUrlAttribute()
+    {
+        return asset('storage/services/'.$this->image);
+    }
 }

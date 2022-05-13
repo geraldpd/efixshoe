@@ -32,8 +32,8 @@
                             <td>{{ $service->name }}</td>
                             <td>{{ $service->description }}</td>
                             <td class="text-center">{{ $service->turnaround_time }}</td>
+                            <td class="text-right">{{ $service->cost }}</td>
                             <td>{{ $service->is_active ? 'Yes' : 'No' }}</td>
-                            <td>{{ $service->cost }}</td>
                             <td><a href="{{ route('admin.services.show', [$service->id]) }}">show</a></td>
                         </tr>
                     @empty

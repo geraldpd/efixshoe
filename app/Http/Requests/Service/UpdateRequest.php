@@ -25,11 +25,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'unique:services,'.$this->service->id],
+            'name' => ['required', 'unique:services,name,'.$this->service->id],
             'description' => ['required'],
             'cost' => ['required', 'numeric', 'max:99999'],
             'turnaround_time' => ['required', 'numeric'],
             'is_active' => ['nullable', 'boolean'],
+            'image' => ['mimes:jpg,jpeg,png,bmp,tiff', 'file', 'max:5120'],
         ];
     }
 }

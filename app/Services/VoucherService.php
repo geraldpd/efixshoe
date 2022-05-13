@@ -6,17 +6,17 @@ use App\Models\Voucher;
 
 class VoucherService
 {
-    public static function generateCode(int $count = 1, string $prefix = 'EFIX-')
+    public static function generateCode(int $count = 1, $prefix = 'EFIX')
     {
         $batch = [];
         for ($i = 0; $i < $count; $i++) {
-            $batch[] = $prefix.self::generateRandomString();
+            $batch[] = self::generateRandomString($prefix);
         }
 
         return $batch;
     }
 
-    static function generateRandomString() {
+    static function generateRandomString($prefix) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $characters_length = strlen($characters);
         $random_string = '';
@@ -25,6 +25,6 @@ class VoucherService
             $random_string .= $characters[rand(0, $characters_length - 1)];
         }
 
-        return $random_string;
+        return $prefix ? $prefix.'-'.$random_string : $random_string;
     }
 }

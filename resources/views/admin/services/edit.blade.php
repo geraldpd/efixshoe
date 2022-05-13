@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
-            <form method="POST" action="{{ route('admin.services.update', [$service]) }}">
+            <form method="POST" action="{{ route('admin.services.update', [$service]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -60,16 +60,35 @@
 
                 <br>
 
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea name="description" class="form-control" id="description" placeholder="Description" rows="10">{{ $service->description ?? old('description') }}</textarea>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="description">Description</label>
+                        <textarea name="description" class="form-control" id="description" placeholder="Description" rows="10">{{ $service->description ?? old('description') }}</textarea>
 
-                    @if ($errors->has('description'))
-                    <small class="help-block text-danger">
-                        <strong>{{ $errors->first('description') }}</strong>
-                    </small>
-                    @endif
+                        @if ($errors->has('description'))
+                        <small class="help-block text-danger">
+                            <strong>{{ $errors->first('description') }}</strong>
+                        </small>
+                        @endif
+                    </div>
                 </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="image" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="image" name="image">
+
+                        @if ($errors->has('image'))
+                            <small class="help-block text-danger">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </small>
+                        @endif
+                    </div>
+                </div>
+
+                <br>
 
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{ $service->is_active ? 'checked' : '' }}>

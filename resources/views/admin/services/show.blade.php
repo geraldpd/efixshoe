@@ -19,17 +19,27 @@
                 </div>
             @endif
 
-            <i class="bi-alarm"></i>
-            <i class="fa fa-check"></i>
+            <div class="card">
+                @if($service->image)
+                    <img src="{{ $service->image_url }}" class="card-img-top" alt="{{ $service->name }}" height="340" width="640">
+                @endif
 
-            <h1>{{ $service->name }}</h1>
+                <div class="card-body">
+                  <h5 class="card-title">{{ $service->name }}</h5>
+                  <p class="card-text">{{ $service->description }}</p>
+                </div>
 
-            <p>{{ $service->description }}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cost: <b>{{ $service->cost }}</b></li>
+                    <li class="list-group-item">Turnaround Time:  <b>{{ $service->turnaround_time }} day(s)</b></li>
+                    <li class="list-group-item">{{ $service->is_active ? 'ACTIVE'  : 'INACTIVE' }}</li>
+                </ul>
 
-            <hr>
-
-            <a href="{{ route('admin.services.edit', [$service]) }}" role="button" class="btn btn-primary float-right">Edit</a>
-            <a href="#{{-- route('admin.services.destroy',[$service]) --}}" role="button" class="btn btn-primary float-right">Delete</a>
+                <div class="card-body">
+                    <a href="{{ route('admin.services.edit', [$service]) }}" role="button" class="btn btn-primary float-right">Edit</a>
+                    <button class="btn btn-secondary float-right" disabled>Delete</button>
+                </div>
+              </div>
 
         </div>
     </div>

@@ -31,7 +31,7 @@
                             <td>{{ $voucher->code }}</td>
                             <td>{{ $voucher->is_used ? 'Yes' : 'No' }}</td>
                             <td>{{ $voucher->batch }}</td>
-                            <td>{{ $voucher->expiry_date }}</td>
+                            <td>{{ $voucher->expiry_date ?? 'None'}}</td>
                             <td>action</td>
                         </tr>
                     @empty

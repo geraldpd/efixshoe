@@ -46,10 +46,10 @@ class VoucherController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
         $vouchers = [];
         $codes = VoucherService::generateCode($request->count, $request->prefix);
         $batch = Voucher::latest()->first()?->batch ?? 0;
+
 
         foreach($codes as $code) {
             $vouchers[] = [
@@ -57,7 +57,9 @@ class VoucherController extends Controller
                 'service_id' => $request->service_id,
                 'batch' => $batch + 1,
                 'is_used' => false,
-                'expiry_date' => Carbon::parse($request->expiry_date),
+                'expiry_date' => $request->filled ('expiry_date') ? Carbon::parse($request->expiry_date) : null,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ];
         }
 
