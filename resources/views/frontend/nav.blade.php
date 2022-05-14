@@ -41,7 +41,7 @@
                         </form>
                     </li>
                 @endguest
-                <li><a href="{{ route('booking') }}" class="btn primary-btn">Book A Service</a></li>
+                <li><a href="{{ route('customer.booking') }}" class="btn primary-btn">Book A Service</a></li>
             </div>
             </ul>
         </nav>

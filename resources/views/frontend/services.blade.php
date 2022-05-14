@@ -14,7 +14,37 @@
 <section id="ourServices" data-aos="fade-up">
     <div class="container">
         <div class="ourServices__wrapper">
-            <div class="ourServices__item">
+            @forelse($services as $service)
+                <div class="ourServices__item">
+                    <div class="ourServices__item__img">
+                        @if( $service->name && file_exists(public_path('images/' . Illuminate\Support\Str::slug($service->name) . '.jpg')) )
+                            <img src="{{ asset('images/' . Illuminate\Support\Str::slug($service->name) . '.jpg') }}">
+                        @else
+                            <img src="{{ asset('images/temp_service.jpg') }}">
+                        @endif
+                    </div>
+                    <div class="ourServices__item__info">
+                        <h3 class="ourServices__item__title">{{ $service->name ?: 'Service' }}</h3>
+                        @if($service->is_active)
+                            <h4 class="ourServices__item__price">PHP {{ number_format($service->cost, 2) ?: 'Price' }}</h4>
+                        @else
+                            <h4 class="ourServices__item__red__label">NOT AVAILABLE</h4>
+                        @endif
+                        <p class="ourServices__item__text">{{ $service->description ?: 'Description' }}</p>
+                    </div>
+                </div>
+            @empty
+                <div class="serviceGrid__item">
+                    <div class="serviceGrid__item__img">
+                        <img src="{{ asset('images/temp_service.jpg') }}">
+                    </div>
+                    <div class="serviceGrid__item__info">
+                        <h3 class="serviceGrid__item__title">No Service Available</h3>
+                        <h3 class="serviceGrid__item__price">-</h3>
+                    </div>
+                </div>
+            @endforelse
+            {{-- <div class="ourServices__item">
                 <div class="ourServices__item__img">
                     <img src="{{ asset('images/deepclean.png') }}" alt="deep clean img">
                 </div>
@@ -85,7 +115,7 @@
                     Cleaning and disinfecting your shoes effectively involve treating each material according to its best techniques.
                 </p>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

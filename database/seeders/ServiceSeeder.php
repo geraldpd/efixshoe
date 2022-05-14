@@ -14,13 +14,13 @@ class ServiceSeeder extends Seeder
      */
     public function run()
     {
-        $services = ['Deep clean', 'Unyellowing', 'Reglue', 'Restich', 'Restore'];
+        $services = ['Deep Clean', 'Unyellowing', 'Reglue', 'Restitch', 'Restore'];
 
         foreach($services as $service) {
             Service::create([
                 'name' => $service,
                 'description' => $service,
-                'cost' => rand(100,9999)
+                'cost' => rand(100,900)
             ]);
         }
     }

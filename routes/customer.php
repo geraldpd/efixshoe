@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,6 @@ Route::group([
     'middleware' => ['customer'],
 ], function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/booking', [Controller::class, 'index'])->name('booking');
+    Route::post('/add-to-cart', [Controller::class, 'addToCart'])->name('cart.store');
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Models\Service;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -15,7 +16,9 @@ class Controller extends BaseController
 
     public function index()
     {
-        return view('customer.booking');
+        $services = Service::all();
+
+        return view('customer.booking', compact('services'));
     }
 
     public function addToCart(Request $request)

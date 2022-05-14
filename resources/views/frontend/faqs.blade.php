@@ -73,9 +73,7 @@
                     Q: How long is the turnaround time?
                 </h3>
                 <p class="ourServices__item__text">
-                    A: It takes approximately 3 days. <br>
-                    1. Deep Clean - 1 day <br>
-                    2. Unyellowing, Reglue, Restitch, and Restore - 2 to 3 days
+                    A: It takes approximately {{ $max_turnaround_time ?: 3 }} day(s).
                 </p>
             </div>
             <div class="faq-item">

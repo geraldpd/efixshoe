@@ -30,6 +30,7 @@ section {
 	--black-2: #3f3c3c;
 	--black-3: #5b6359;
 	--white-1: #e8e8e8;
+    --red-1: #ff0000;
 }
 img {
 	width: 100%;
@@ -54,4 +55,10 @@ p {
 a {
 	display: inline-block;
 	text-decoration: none;
+}
+.line-strike {
+    text-decoration: line-through;
+}
+.red-label {
+    color: var(--red-1) !important;
 }

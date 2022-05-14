@@ -206,6 +206,12 @@
 	font-weight: 600;
 	margin-bottom: 0.5rem;
 }
+.serviceGrid__item__red__label {
+    font-size: 1.4rem;
+    color: var(--red-1);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
 .serviceGrid__item__stars {
 	max-height: 15px;
 	width: max-content;

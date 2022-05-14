@@ -70,6 +70,12 @@
 	color: var(--black-1);
 	line-height: 1.2em;
 }
+.ourServices__item__red__label {
+    font-size: 1.8rem;
+    color: var(--red-1);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
 .ourServices__item__price {
 	font-size: 1.8rem;
 	color: var(--green-1);

@@ -16,7 +16,7 @@
                 </p>
                 <div class="button__wrapper">
                     <a href="{{ route('services') }}" class="btn primary-btn">Explore Services</a>
-                    <a href="{{ route('booking') }}" class="btn">Book A Service</a>
+                    <a href="{{ route('customer.booking') }}" class="btn">Book A Service</a>
                 </div>
                 </div>
             </div>
