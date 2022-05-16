@@ -11,11 +11,7 @@
                 @forelse ($services as $service)
                     <div class="serviceGrid__item">
                         <div class="serviceGrid__item__img">
-                            @if( $service->name && file_exists(public_path('images/' . Illuminate\Support\Str::slug($service->name) . '.jpg')) )
-                                <img src="{{ asset('images/' . Illuminate\Support\Str::slug($service->name) . '.jpg') }}">
-                            @else
-                                <img src="{{ asset('images/temp_service.jpg') }}">
-                            @endif
+                            <img src="{{ $service->image ? $service->image_url : asset('images/temp_service.jpg') }}">
                         </div>
                         <div class="serviceGrid__item__info">
                             <h3 class="serviceGrid__item__title">{{ $service->name ?: 'Service' }}</h3>

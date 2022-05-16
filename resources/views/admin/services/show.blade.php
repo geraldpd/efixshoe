@@ -21,7 +21,7 @@
 
             <div class="card">
                 @if($service->image)
-                    <img src="{{ $service->image_url }}" class="card-img-top" alt="{{ $service->name }}" height="340" width="640">
+                    <img src="{{ $service->image_url }}" class="card-img-top" alt="{{ $service->name }}" style="object-fit:contain; width:200px; height:300px;">
                 @endif
 
                 <div class="card-body">
