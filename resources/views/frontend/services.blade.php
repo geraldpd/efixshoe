@@ -17,7 +17,7 @@
             @forelse($services as $service)
                 <div class="ourServices__item">
                     <div class="ourServices__item__img">
-                        <img src="{{ $service->image ? $service->image_url : asset('images/temp_service.jpg') }}">
+                        <img src="{{ $service->image ? asset($service->image) : asset('images/temp_service.jpg') }}">
                     </div>
                     <div class="ourServices__item__info">
                         <h3 class="ourServices__item__title">{{ $service->name ?: 'Service' }}</h3>

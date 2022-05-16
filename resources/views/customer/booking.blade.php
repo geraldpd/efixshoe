@@ -11,7 +11,7 @@
                 @forelse ($services as $service)
                     <div class="serviceGrid__item">
                         <div class="serviceGrid__item__img">
-                            <img src="{{ $service->image ? $service->image_url : asset('images/temp_service.jpg') }}">
+                            <img src="{{ $service->image ? asset($service->image) : asset('images/temp_service.jpg') }}">
                         </div>
                         <div class="serviceGrid__item__info">
                             <h3 class="serviceGrid__item__title">{{ $service->name ?: 'Service' }}</h3>

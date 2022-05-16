@@ -48,11 +48,11 @@ class ServiceController extends Controller
             $image = $request->file('image');
             $extension = $image->getClientOriginalExtension();
 
-            Storage::putFileAs(
-                'public/services', $image, $service->id.'.'.$extension
+            Storage::disk('root_public')->putFileAs(
+                'service_images', $image, $service->id.'.'.$extension
             );
 
-            $service->image = $service->id.'.'.$extension;
+            $service->image = "service_images/$service->id.$extension";
             $service->save();
         }
 
@@ -101,11 +101,11 @@ class ServiceController extends Controller
             $image = $request->file('image');
             $extension = $image->getClientOriginalExtension();
 
-            Storage::putFileAs(
-                'public/services', $image, $service->id.'.'.$extension
+            Storage::disk('root_public')->putFileAs(
+                'service_images', $image, $service->id.'.'.$extension
             );
 
-            $service->image = $service->id.'.'.$extension;
+            $service->image =  "service_images/$service->id.$extension";
         }
 
         $service->update($data);
