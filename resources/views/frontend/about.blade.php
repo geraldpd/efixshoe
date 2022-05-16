@@ -41,13 +41,13 @@
     </div>
     <div class="ourGoals__imgs__wrapper" data-aos="fade-up">
       <div class="ourGoals__img1">
-        <img src="{{ asset('images/deepclean.png') }}" alt="deepclean img">
+        <img src="{{ asset('images/deep-clean.jpg') }}" alt="deepclean img">
       </div>
       <div class="ourGoals__img2">
           <img src="{{ asset('images/reglue.jpg') }}" alt="reglue img">
       </div>
       <div class="ourGoals__img3">
-          <img src="{{ asset('images/restoration.png') }}" alt="restore img">
+          <img src="{{ asset('images/restore.jpg') }}" alt="restore img">
       </div>
     </div>
   </div>
