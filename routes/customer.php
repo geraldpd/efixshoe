@@ -21,4 +21,5 @@ Route::group([
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/booking', [Controller::class, 'index'])->name('booking');
     Route::post('/add-to-cart', [Controller::class, 'addToCart'])->name('cart.store');
+    Route::get('/my-cart', [Controller::class, 'myCart'])->name('cart.content');
 });

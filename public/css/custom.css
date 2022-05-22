@@ -1,3 +1,19 @@
+.subtitle-success {
+    font-size: 1.6rem;
+    font-weight: 100;
+    margin-bottom: 1rem;
+    color: var(--green-1);
+    line-height: 1.2em;
+}
+
+.subtitle-error {
+    font-size: 1.6rem;
+    font-weight: 100;
+    margin-bottom: 1rem;
+    color: var(--red-1);
+    line-height: 1.2em;
+}
+
 /* page title styles */
 #page__title {
 	padding-top: 3rem;

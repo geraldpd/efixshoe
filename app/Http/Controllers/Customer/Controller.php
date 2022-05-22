@@ -16,29 +16,40 @@ class Controller extends BaseController
 
     public function index()
     {
-        $services = Service::all();
-
-        return view('customer.booking', compact('services'));
+        return view('customer.booking');
     }
 
     public function addToCart(Request $request)
     {
-        $validatedData = $request->validate([
-            'pairs_of_shoes' => ['required', 'integer', 'min:1', 'max:10'],
-            'service' => ['array', 'required'],
-        ]);
-
-        dd("Work in progress...");
-
-//        Cart::add([
-//            'id' => rand(111, 999),
-//            'name' => 'Booking #' . rand(111, 999),
-//            'qty' => $request->pairs_of_shoes,
-//            'price' => 999,
-//            'weight' => 0,
-//            'options' => $request->service
+//        $request->validate([
+//            'pairs_of_shoes' => ['required', 'integer', 'min:1', 'max:10'],
+//            'service' => ['array', 'required', 'exists:App\Models\Service,id'],
 //        ]);
+//
+//        $services = Service::whereIn('id', $request->service)->get();
+//
+//        $totalPrice = (int) $request->pairs_of_shoes * $services->sum('cost');
+//
+//        $hash = md5(rand(1, 999999));
+//
+//        Cart::add([
+//            'id' => $hash,
+//            'name' => 'Booking #' . $hash,
+//            'qty' => $request->pairs_of_shoes,
+//            'price' => $totalPrice,
+//            'weight' => 0,
+//            'options' => [
+//                'services' => $services->pluck('name', 'id')->toArray()
+//            ]
+//        ]);
+//
+//        return redirect()->route('customer.booking')->with('success', 'Successfully added to cart.');
+    }
 
-        return redirect()->back();
+    public function myCart()
+    {
+        $cartItems = Cart::content();
+
+        return view('customer.cart', compact('cartItems'));
     }
 }

@@ -24,6 +24,7 @@
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/about.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    @livewireStyles
 </head>
 <body>
     @include('frontend.nav')
@@ -32,6 +33,7 @@
 
     @include('frontend.footer')
 
+    @livewireScripts
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
