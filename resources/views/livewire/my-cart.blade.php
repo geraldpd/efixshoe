@@ -33,16 +33,21 @@
             </div>
 
             @if( Cart::count() > 0 )
-                <h4 class="subtitle-success">
+                <h2 class="page__subtitle__text" style="text-align: right;">
                     Total: PHP {{ Cart::priceTotal() }}
-                </h4>
+                </h2>
 
                 <div class="form__wrapper">
-                    <form method="POST" action="{{ route('customer.cart.store') }}">
+                    <form wire:submit.prevent="checkout" method="POST" action="{{ route('customer.checkout') }}">
                         @csrf
                         <div class="form__group">
-                            <label for="pickup_date">Pick-up Date</label>
-                            <input id="pickup_date" type="number" name="pickup_date" value="{{ old('pickup_date') }}" required >
+                            <label for="pickup_date">Pick-up Date: {{ $pickupDate }}</label>
+                            <select name="pickup_date" id="pickup_date" wire:model="selectedPickupSlot" required>
+                                <option value=''>--Choose a time slot--</option>
+                                @foreach($slots as $key => $slot)
+                                    <option value="{{ $key }}">{{ $slot }}</option>
+                                @endforeach
+                            </select>
 
                             @error('pickup_date')
                                 <p class="error-message"><strong>{{ $message }}</strong></p>
@@ -50,8 +55,13 @@
                         </div>
 
                         <div class="form__group">
-                            <label for="delivery_date">Delivery Date</label>
-                            <input id="delivery_date" type="number" name="delivery_date" value="{{ old('delivery_date') }}">
+                            <label for="delivery_date">Delivery Date: {{ $deliveryDate }}</label>
+                            <select name="delivery_date" id="delivery_date" wire:model="selectedDeliverySlot" required>
+                                <option value=''>--Choose a time slot--</option>
+                                @foreach($slots as $key => $slot)
+                                    <option value="{{ $key }}">{{ $slot }}</option>
+                                @endforeach
+                            </select>
 
                             @error('delivery_date')
                                 <p class="error-message"><strong>{{ $message }}</strong></p>

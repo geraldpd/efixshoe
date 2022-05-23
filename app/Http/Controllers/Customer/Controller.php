@@ -52,4 +52,9 @@ class Controller extends BaseController
 
         return view('customer.cart', compact('cartItems'));
     }
+
+    public function checkout(Request $request)
+    {
+
+    }
 }

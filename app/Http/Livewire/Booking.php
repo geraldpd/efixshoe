@@ -17,7 +17,11 @@ class Booking extends Component
 
     protected $rules = [
         'quantity' => ['required', 'integer', 'min:1', 'max:10'],
-        'selectedServices' => ['array', 'required', 'exists:App\Models\Service,id']
+        'selectedServices' => ['array', 'required', 'exists:App\Models\Service,id,is_active,1']
+    ];
+
+    protected $messages = [
+        'selectedServices.exists' => 'Selected Service(s) are invalid.'
     ];
 
     public function mount()

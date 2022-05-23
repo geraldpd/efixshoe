@@ -78,7 +78,7 @@
                             </div>
                         @endforelse
 
-                        @error('service')
+                        @error('selectedServices')
                             <br><p class="error-message"><strong>{{ $message }}</strong></p>
                         @enderror
                     </div>

@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- page Title -->
-    <section id="page__title" data-aos="fade-up">
+    <section id="page__title">
         <div class="container">
             <h2 class="page__title__text">
                 My Cart
