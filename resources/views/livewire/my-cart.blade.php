@@ -41,7 +41,7 @@
                     <form wire:submit.prevent="checkout" method="POST" action="{{ route('customer.checkout') }}">
                         @csrf
                         <div class="form__group">
-                            <label for="pickup_date">Pick-up Date: {{ $pickupDate }}</label>
+                            <label for="pickup_date">Pick-up Date: {{ $pickupDate->format('d F Y') }}</label>
                             <select name="pickup_date" id="pickup_date" wire:model="selectedPickupSlot" required>
                                 <option value=''>--Choose a time slot--</option>
                                 @foreach($slots as $key => $slot)
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="form__group">
-                            <label for="delivery_date">Delivery Date: {{ $deliveryDate }}</label>
+                            <label for="delivery_date">Delivery Date: {{ $deliveryDate->format('d F Y') }}</label>
                             <select name="delivery_date" id="delivery_date" wire:model="selectedDeliverySlot" required>
                                 <option value=''>--Choose a time slot--</option>
                                 @foreach($slots as $key => $slot)
@@ -68,6 +68,22 @@
                             @enderror
                         </div>
 
+                        <div class="form__group">
+                            <label for="mode_of_payment">Mode of Payment</label>
+                            <select name="mode_of_payment" id="mode_of_payment" wire:model="selectedModeOfPayment" required>
+                                <option value=''>--Choose Mode of Payment--</option>
+                                @foreach($paymentMethods as $paymentMethod)
+                                    <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
+                                @endforeach
+                            </select>
+                            <p class="subtitle-success"><strong>Note: After successful booking, please go to your Account page to process your payment (if using GCash/PayMaya/Bank Transfer).</strong></p>
+
+                            @error('mode_of_payment')
+                                <p class="error-message"><strong>{{ $message }}</strong></p>
+                            @enderror
+                        </div>
+
+                        <br>
                         <button type="submit" class="btn primary-btn" style="margin-top: 3rem;">Checkout</button>
                     </form>
                 </div>

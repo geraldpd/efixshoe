@@ -18,7 +18,7 @@ class CreateBookingServicesTable extends Migration
             $table->foreignId('booking_id')->constrained();
             $table->foreignId('service_id')->constrained();
             $table->foreignId('voucher_id')->nullable()->constrained();
-            $table->integer('group_number');//1
+            $table->integer('group_number')->nullable();//1
             //$table->integer('pairs_of_shoes')->comment('the number of pairs of shoes');
             $table->timestamps();
             $table->softDeletes();
