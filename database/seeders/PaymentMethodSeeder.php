@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Faker\Factory;
 use App\Models\PaymentMethod;
 use Illuminate\Database\Seeder;
 
@@ -15,15 +14,13 @@ class PaymentMethodSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Factory::create();
-
         $paymentMethods = ['Cash', 'GCash', 'PayMaya', 'Bank Transfer'];
 
         foreach($paymentMethods as $paymentMethod) {
             PaymentMethod::create([
                 'name' => $paymentMethod,
                 'account_name' => $paymentMethod,
-                'account_number' => $faker->bankAccountNumber,
+                'account_number' => $paymentMethod != 'Cash' ? rand(10000,99999) : 0,
                 'is_active' => 1
             ]);
         }
