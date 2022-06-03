@@ -23,6 +23,11 @@ class Service extends Model
         'is_active',
     ];
 
+    public function bookingItem()
+    {
+        return $this->belongsTo(BookingItem::class);
+    }
+
     public function getImageUrlAttribute()
     {
         return asset('storage/services/'.$this->image);

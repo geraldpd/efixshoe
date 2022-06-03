@@ -1,23 +1,54 @@
-@extends('layouts.app')
+@extends('layouts.frontend.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <!-- page Title -->
+    <section id="page__title">
+        <div class="container">
+            <h2 class="page__title__text">
+                My Account
+            </h2>
+        </div>
+    </section>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+    <section id="ourServices">
+        <div class="container">
+            @if( session('success') )
+                <h5 class="subtitle-success">
+                    {{ session('success') }}
+                </h5>
+            @elseif( session('error') )
+                <h5 class="subtitle-error">
+                    {{ session('error') }}
+                </h5>
+            @endif
+
+            <div class="ourServices__wrapper">
+                @forelse($bookings as $booking)
+                    <div class="ourServices__item">
+                        <div class="ourServices__item__info">
+                            <h3 class="ourServices__item__subtitle">Booking ID: {{ $booking->id }} | Status: {{ $booking->status }}</h3>
+                            <h3 class="ourServices__item__subtitle">Payment Method: {{ ucwords($booking->paymentDetail->paymentMethod->name) }}</h3>
+                            <h3 class="ourServices__item__subtitle" style="color: var(--green-1);">Total Price: PHP {{ number_format($booking->paymentDetail->total_cost, 2) ?: 'Price' }}</h3>
+                            @foreach ($booking->bookingItems as $item)
+                                <p class="ourServices__item__text">Pairs of Shoes: {{ $item->pairs_of_shoes }} | Service(s): {{ implode(", ", $item->services->pluck('name')->toArray()) }}</p>
+                            @endforeach
+                            <br>
                         </div>
-                    @endif
 
-                    {{ __('You are logged in!') }}
-                </div>
+                        @if ($booking->paymentDetail->paymentMethod->name != 'Cash')
+                            <a href="#" class="btn">Upload Payment</a>
+                        @endif
+                    </div>
+                @empty
+                    <div class="ourServices__item">
+                        <div class="ourServices__item__info">
+                            <h3 class="ourServices__item__title">No Items</h3>
+                            <h3 class="ourServices__item__price">-</h3>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
-    </div>
-</div>
+    </section>
+
 @endsection

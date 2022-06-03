@@ -23,10 +23,10 @@
                         <a href="#" class="btn" wire:click="removeItemInCart('{{ $item->rowId }}')">Remove Item</a>
                     </div>
                 @empty
-                    <div class="serviceGrid__item">
-                        <div class="serviceGrid__item__info">
-                            <h3 class="serviceGrid__item__title">No Items</h3>
-                            <h3 class="serviceGrid__item__price">-</h3>
+                    <div class="ourServices__item">
+                        <div class="ourServices__item__info">
+                            <h3 class="ourServices__item__title">No Items</h3>
+                            <h3 class="ourServices__item__price">-</h3>
                         </div>
                     </div>
                 @endforelse

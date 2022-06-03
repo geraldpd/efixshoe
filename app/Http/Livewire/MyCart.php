@@ -108,11 +108,6 @@ class MyCart extends Component
         $this->pickupDate->setTime($this->times[$this->selectedPickupSlot], 0, 0);
         $this->deliveryDate->setTime($this->times[$this->selectedDeliverySlot], 0, 0);
 
-        $services = [];
-        foreach($cartItems as $items){
-            $services[] = array_keys($items->options->services);
-        }
-
         $booking = Booking::create([
             'user_id' => Auth::user()->id,
             'status' => 'Pending',
@@ -120,11 +115,24 @@ class MyCart extends Component
             'delivery_date' => $this->deliveryDate
         ]);
 
-        foreach(array_unique(Arr::flatten($services)) as $service){
-            $booking->bookingServices()->create([
-                'service_id' => $service
+        $services = [];
+        foreach($cartItems as $items){
+            $services[] = array_keys($items->options->services);
+
+            $bookingItem = $booking->bookingItems()->create([
+                'pairs_of_shoes' => $items->qty
             ]);
+
+            $bookingItem->services()->attach(array_keys($items->options->services));
         }
+
+        // foreach(array_unique(Arr::flatten($services)) as $service){
+        //     $booking->bookingServices()->create([
+        //         'service_id' => $service
+        //     ]);
+        // }
+
+        // $booking->services()->attach(array_unique(Arr::flatten($services)));
 
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,

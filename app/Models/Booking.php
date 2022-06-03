@@ -16,8 +16,8 @@ class Booking extends Model
         'delivery_date'
     ];
 
-    public function bookingServices(){
-        return $this->hasMany(BookingService::class);
+    public function bookingItems(){
+        return $this->hasMany(BookingItem::class);
     }
 
     public function paymentDetail(){

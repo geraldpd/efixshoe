@@ -6,6 +6,7 @@
     @guest
         <li><a class="nav__link" href="{{ route('login') }}">Account</a></li>
     @else
+        <li><a class="nav__link" href="{{ route('customer.home') }}">My Account</a></li>
         <li><a class="nav__link" href="{{ route('customer.cart.content') }}">My Cart ({{ $cartCount }})</a></li>
         <li>
             <a class="nav__link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>

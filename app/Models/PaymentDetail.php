@@ -15,4 +15,8 @@ class PaymentDetail extends Model
         'total_cost',
         'receipt_attachment'
     ];
+
+    public function paymentMethod(){
+        return $this->belongsTo(PaymentMethod::class);
+    }
 }

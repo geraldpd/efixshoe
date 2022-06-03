@@ -21,4 +21,8 @@ class PaymentMethod extends Model
         'image',
         'is_active',
     ];
+
+    public function paymentDetail(){
+        return $this->hasMany(PaymentDetail::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\Models\Booking;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,6 +14,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('customer.home');
+        $bookings = Booking::where('user_id', auth()->user()->id)
+            ->with(['bookingItems', 'bookingItems.services', 'paymentDetail'])
+            ->get();
+
+        // foreach($bookings as $booking){
+        //     dd($booking->bookingItems()->sum('pairs_of_shoes'));
+        // }
+
+        return view('customer.home', compact('bookings'));
     }
 }
