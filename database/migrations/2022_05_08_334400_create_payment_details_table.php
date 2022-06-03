@@ -17,7 +17,7 @@ class CreatePaymentDetailsTable extends Migration
             $table->id();
             $table->foreignId('booking_id')->constrained();
             $table->foreignId('payment_method_id')->constrained();
-            $table->decimal('total_cost', 6, 2);
+            $table->bigInteger('total_cost');
             $table->text('receipt_attachment')->nullable()->comment('for online payments, screenshot of the payment used for verification');
             $table->timestamps();
         });

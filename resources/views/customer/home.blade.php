@@ -28,7 +28,7 @@
                         <div class="ourServices__item__info">
                             <h3 class="ourServices__item__subtitle">Booking ID: {{ $booking->id }} | Status: {{ $booking->status }}</h3>
                             <h3 class="ourServices__item__subtitle">Payment Method: {{ ucwords($booking->paymentDetail->paymentMethod->name) }}</h3>
-                            <h3 class="ourServices__item__subtitle" style="color: var(--green-1);">Total Price: PHP {{ number_format($booking->paymentDetail->total_cost, 2) ?: 'Price' }}</h3>
+                            <h3 class="ourServices__item__subtitle" style="color: var(--green-1);">Total Price: PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) ?: 'Price' }}</h3>
                             @foreach ($booking->bookingItems as $item)
                                 <p class="ourServices__item__text">Pairs of Shoes: {{ $item->pairs_of_shoes }} | Service(s): {{ implode(", ", $item->services->pluck('name')->toArray()) }}</p>
                             @endforeach

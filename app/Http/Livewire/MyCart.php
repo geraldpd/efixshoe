@@ -136,7 +136,7 @@ class MyCart extends Component
 
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,
-            'total_cost' => number_format((float) $cartPriceTotal, 2, '.', '')
+            'total_cost' => (float) $cartPriceTotal * 100
         ]);
 
         Cart::destroy();
