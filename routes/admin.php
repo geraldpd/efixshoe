@@ -26,6 +26,7 @@ Route::group([
 
         Route::get('/', [HomeController::class, 'index'])->name('home');
 
+        Route::resource('bookings', BookingController::class);
         Route::resource('services', ServiceController::class);
         Route::resource('payment_methods', PaymentMethodController::class);
         Route::resource('vouchers', VoucherController::class);

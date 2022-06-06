@@ -19,9 +19,9 @@
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
-                        <th scope="col">Turnaround Time</th></th>
+                        <th scope="col">Turnaround Time</th>
                         <th scope="col">Cost</th>
-                        <th scope="col">Active</th></th>
+                        <th scope="col">Active</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>

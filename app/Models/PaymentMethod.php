@@ -22,7 +22,7 @@ class PaymentMethod extends Model
         'is_active',
     ];
 
-    public function paymentDetail(){
+    public function paymentDetails(){
         return $this->hasMany(PaymentDetail::class);
     }
 }
