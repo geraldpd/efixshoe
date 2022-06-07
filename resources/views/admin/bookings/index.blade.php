@@ -27,10 +27,10 @@
                             <td>{{ $booking->id }}</td>
                             <td>{{ $booking->status }}</td>
                             <td>{{ $booking->customer->email }}</td>
-                            <td>{{ $booking->pickup_date }}</td>
-                            <td>{{ $booking->delivery_date }}</td>
+                            <td>{{ $booking->pickup_date->format('F d Y g:i A') }}</td>
+                            <td>{{ $booking->delivery_date->format('F d Y g:i A') }}</td>
                             <td class="text-center">{{ $booking->total_pairs_of_shoes }}</td>
-                            <td>{{ $booking->paymentDetail->total_cost }}</td>
+                            <td>PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) }}</td>
                             <td>
                                 <a href="{{ route('admin.bookings.show', [$booking]) }}">Details</a>
                             </td>

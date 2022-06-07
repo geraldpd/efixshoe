@@ -34,13 +34,13 @@
                             <dd class="col-sm-9">{{ $booking->customer->contact_number }}</dd>
 
                             <dt class="col-sm-3">Address:</dt>
-                            <dd class="col-sm-9">{{ $booking->customer->address_1 }}</dd>
+                            <dd class="col-sm-9">{{ $booking->customer->address }}</dd>
 
                             <dt class="col-sm-3">Pickup Date:</dt>
-                            <dd class="col-sm-9">{{ $booking->pickup_date }}</dd>
+                            <dd class="col-sm-9">{{ $booking->pickup_date->format('F d Y g:i A') }}</dd>
 
                             <dt class="col-sm-3">Delivery Date:</dt>
-                            <dd class="col-sm-9">{{ $booking->delivery_date }}</dd>
+                            <dd class="col-sm-9">{{ $booking->delivery_date->format('F d Y g:i A') }}</dd>
                         </dl>
 
                     </div>
@@ -76,7 +76,7 @@
                             </dt>
 
                             <dt class="col-sm-3">Total Cost:</dt>
-                            <dd class="col-sm-9"><h4>PHP {{ $booking->paymentDetail->total_cost }}</h4></dd>
+                            <dd class="col-sm-9"><h4>PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) }}</h4></dd>
 
 
                             <dt class="col-sm-3">Payment Mode:</dt>
@@ -107,7 +107,7 @@
                                     <dl class="row">
                                         @foreach ($bookingItem->services as $service)
                                             <dt class="col-sm-8">{{ $service->name }}</dt>
-                                            <dd class="col-sm-4 text-right">PHP {{ $service->cost }}</dd>
+                                            <dd class="col-sm-4 text-right">PHP {{ number_format($service->cost, 2) }}</dd>
                                         @endforeach
 
                                         <hr class="booking_item_divider" />
