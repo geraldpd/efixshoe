@@ -14,14 +14,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::where('user_id', auth()->user()->id)
-            ->with(['bookingItems', 'bookingItems.services', 'paymentDetail'])
-            ->get();
+        // $bookings = Booking::where('user_id', auth()->user()->id)
+        //     ->with(['bookingItems', 'bookingItems.services', 'paymentDetail'])
+        //     ->get();
 
         // foreach($bookings as $booking){
         //     dd($booking->bookingItems()->sum('pairs_of_shoes'));
         // }
 
-        return view('customer.home', compact('bookings'));
+        return view('customer.home');
     }
 }

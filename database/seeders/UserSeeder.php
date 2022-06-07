@@ -25,8 +25,7 @@ class UserSeeder extends Seeder
 				'email' => Str::lower($role.'@'.config('app.name').'.com'),
 				'email_verified_at' => Carbon::now(),
 				'password' => bcrypt('password'),
-				'address_1' => 'address_1',
-				'address_2' => 'address_2',
+				'address' => 'address',
                 'remember_token' => Str::random(10),
 	        ]);
 

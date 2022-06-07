@@ -58,16 +58,6 @@
                         <li><a class="nav__link" href="{{ route('faqs') }}">FAQs</a></li>
                         @guest
                             <li><a class="nav__link" href="{{ route('login') }}">Account</a></li>
-                        @else
-                            <li>|</li>
-                            <li><span class="nav__link">Hi, {{ ucwords(Auth::user()->first_name) }}!</span></li>
-                            <li>|</li>
-                            <li>
-                                <a class="nav__link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
                         @endguest
                         <li><a href="#" class="btn primary-btn">Book A Service</a></li>
                     </div>

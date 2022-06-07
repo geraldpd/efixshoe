@@ -110,7 +110,7 @@ class MyCart extends Component
 
         $booking = Booking::create([
             'user_id' => Auth::user()->id,
-            'status' => 'Pending',
+            'status' => Booking::PENDING,
             'pickup_date' => $this->pickupDate,
             'delivery_date' => $this->deliveryDate
         ]);

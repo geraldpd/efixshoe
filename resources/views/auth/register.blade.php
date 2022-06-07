@@ -76,19 +76,10 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
-                                    <label for="address_1">{{ __('Address 1') }}</label>
-                                    <textarea id="address_1" name="address_1" required autofocus>{{ old('address_1') }}</textarea>
+                                    <label for="address">{{ __('Address') }}</label>
+                                    <textarea id="address" name="address" required autofocus>{{ old('address') }}</textarea>
 
-                                    @error('address_1')
-                                        <p class="error-message"><strong>{{ $message }}</strong></p>
-                                    @enderror
-                                </div>
-
-                                <div class="form__group form__group__full">
-                                    <label for="address_2">{{ __('Address 2') }}</label>
-                                    <textarea id="address_2" name="address_2" required autofocus>{{ old('address_1') }}</textarea>
-
-                                    @error('address_2')
+                                    @error('address')
                                         <p class="error-message"><strong>{{ $message }}</strong></p>
                                     @enderror
                                 </div>
