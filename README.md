@@ -7,23 +7,25 @@ An Online Shoe Care and Services in Metro Vigan
 - [x] About Us
 - [x] FAQs
 - [x] Account (Login/Register)
-- [ ] Book A Service
+- [x] Book A Service
+- [x] Checkout Page
 
 ## Client Modules
 - [x] Profile Registation
 - [x] Profile Login
-- [ ] Bookings
-- [ ] Transaction History
-- [ ] Payment
+- [x] Bookings / Transaction History
+- [ ] Payment (Upload Receipt)
 - [ ] Rewash/Refund
 - [ ] Customer Feedback
 
 ## Admin Modules
 - [x] Login
 - [ ] User/Staff Management
-- [ ] Service Management (Active/Disabled services & Availabilities)
-- [ ] Bookings (List)
+- [x] Service Management (Active/Disabled services & Availabilities)
+- [x] Payment Methods Management
+- [x] Bookings (List)
 - [ ] Bookings (Calendar)
+- [ ] Vouchers Management
 - [ ] Reports
 - [ ] Email Notifications (if approved/decline/cancelled/refund booking)
 
