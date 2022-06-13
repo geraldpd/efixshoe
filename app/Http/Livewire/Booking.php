@@ -40,7 +40,7 @@ class Booking extends Component
 
         $services = Service::whereIn('id', $this->selectedServices)->get();
 
-        $totalPrice = $this->quantity * $services->sum('cost');
+        // $totalPrice = $this->quantity * $services->sum('cost');
 
         $hash = md5(rand(1, 999999));
 
@@ -48,7 +48,7 @@ class Booking extends Component
             'id' => $hash,
             'name' => 'Booking #' . $hash,
             'qty' => $this->quantity,
-            'price' => $totalPrice,
+            'price' => $services->sum('cost'),
             'weight' => 0,
             'options' => [
                 'services' => $services->pluck('name', 'id')->toArray()

@@ -16,7 +16,7 @@
                     <div class="ourServices__item">
                         <div class="ourServices__item__info">
                             <h4 class="ourServices__item__title">Pairs of Shoes: {{ $item->qty }}</h4>
-                            <h4 class="ourServices__item__price">PHP {{ number_format($item->price, 2) ?: 'Price' }}</h4>
+                            <h4 class="ourServices__item__price">PHP {{ number_format($item->qty * $item->price, 2) ?: 'Price' }}</h4>
                             <p class="ourServices__item__text">Service(s): {{ implode(", ", $item->options->services) }}</p>
                         </div>
 
