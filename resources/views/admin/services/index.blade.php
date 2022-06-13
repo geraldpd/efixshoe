@@ -6,6 +6,12 @@
 
         <h1>Services</h1>
 
+        @if(session()->has('message'))
+            <div class="alert alert-info">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
         <div class="col-md-12">
 
             <a href="{{ route('admin.services.create') }}" role="button" class="btn btn-primary float-right">Create</a>
@@ -34,7 +40,7 @@
                             <td class="text-center">{{ $service->turnaround_time }}</td>
                             <td class="text-right">{{ $service->cost }}</td>
                             <td>{{ $service->is_active ? 'Yes' : 'No' }}</td>
-                            <td><a href="{{ route('admin.services.show', [$service->id]) }}">show</a></td>
+                            <td><a href="{{ route('admin.services.edit', [$service->id]) }}">Edit</a></td>
                         </tr>
                     @empty
                         <tr>

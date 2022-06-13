@@ -6,6 +6,12 @@
 
         <h1>Payment Methods</h1>
 
+        @if(session()->has('message'))
+            <div class="alert alert-info">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
         <div class="col-md-12">
 
             <a href="{{ route('admin.payment_methods.create') }}" role="button" class="btn btn-primary float-right">Create</a>
@@ -32,7 +38,7 @@
                             <td>{{ $payment_method->account_name }}</td>
                             <td>{{ $payment_method->account_number }}</td>
                             <td>{{ $payment_method->is_active ? 'Yes' : 'No' }}</td>
-                            <td><a href="{{ route('admin.payment_methods.show', [$payment_method->id]) }}">show</a></td>
+                            <td><a href="{{ route('admin.payment_methods.edit', [$payment_method->id]) }}">Edit</a></td>
                         </tr>
                     @empty
                         <tr>

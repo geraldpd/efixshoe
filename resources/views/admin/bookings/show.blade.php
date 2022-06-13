@@ -57,7 +57,7 @@
                                         <label for="">Select Progress</label>
                                         <div class="input-group mb-3">
                                             <select class="form-select" id="status"  name="status">
-                                                <option value="" selected disabled> {{ $booking->status }}(current)</option>
+                                                <option value="" selected disabled> {{ Str::of($booking->status)->title()->replace('_', ' ') }} (current)</option>
                                                 @foreach($statuses as $status)
                                                     <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
                                                 @endforeach

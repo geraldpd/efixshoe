@@ -15,6 +15,7 @@ class Booking extends Model
     const PROCESSING = 'PROCESSING'; //cleaning
     const AWAITING_PAYMENT = 'AWAITING_PAYMENT';
     const FOR_DELIVERY = 'FOR_DELIVERY';
+    const FOR_CASH_ON_DELIVERY = 'FOR_CASH_ON_DELIVERY';
     const COMPLETED = 'COMPLETED';
 
     protected $fillable = [

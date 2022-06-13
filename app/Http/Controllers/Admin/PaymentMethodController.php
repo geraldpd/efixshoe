@@ -85,7 +85,7 @@ class PaymentMethodController extends Controller
 
         $payment_method->update($data);
 
-        return redirect()->route('admin.payment_methods.show', [$payment_method])->with('message', 'Payment Method Successfully Updated');
+        return redirect()->route('admin.payment_methods.index', [$payment_method])->with('message', 'Payment Method Successfully Updated');
     }
 
     /**

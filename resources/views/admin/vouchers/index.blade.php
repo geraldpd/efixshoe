@@ -6,6 +6,12 @@
 
         <h1>Vouchers</h1>
 
+        @if(session()->has('message'))
+            <div class="alert alert-info">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+
         <div class="col-md-12">
 
             <a href="{{ route('admin.vouchers.create') }}" role="button" class="btn btn-primary float-right">Create</a>

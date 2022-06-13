@@ -25,7 +25,7 @@
                     @forelse ($bookings as $booking)
                         <tr>
                             <td>{{ $booking->id }}</td>
-                            <td>{{ $booking->status }}</td>
+                            <td>{{ Str::of($booking->status)->upper()->replace('_', ' ') }}</td>
                             <td>{{ $booking->customer->email }}</td>
                             <td>{{ $booking->pickup_date->format('F d Y g:i A') }}</td>
                             <td>{{ $booking->delivery_date->format('F d Y g:i A') }}</td>
