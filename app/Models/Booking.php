@@ -11,11 +11,11 @@ class Booking extends Model
 
     const PENDING = 'PENDING'; //initial
     const DECLINED = 'DECLINED';
-    const FOR_PICKUP = 'FOR_PICKUP';
+    const FOR_PICKUP = 'FOR PICKUP';
     const PROCESSING = 'PROCESSING'; //cleaning
-    const AWAITING_PAYMENT = 'AWAITING_PAYMENT';
-    const FOR_DELIVERY = 'FOR_DELIVERY';
-    const FOR_CASH_ON_DELIVERY = 'FOR_CASH_ON_DELIVERY';
+    const AWAITING_PAYMENT = 'AWAITING PAYMENT';
+    const FOR_DELIVERY = 'FOR DELIVERY';
+    const FOR_CASH_ON_DELIVERY = 'CASH ON DELIVERY';
     const COMPLETED = 'COMPLETED';
 
     protected $fillable = [
@@ -46,5 +46,32 @@ class Booking extends Model
     public function getTotalPairsOfShoesAttribute()
     {
         return $this->bookingItems->sum('pairs_of_shoes');
+    }
+
+    public function getStatusColorAttribute(){
+        $color = '#000000'; // Default color is Black
+        switch ($this->status) {
+            case $this::PENDING:
+            case $this::PROCESSING:
+            case $this::AWAITING_PAYMENT:
+                $color = '#f26636'; // Orange-ish
+            break;
+
+            case Booking::DECLINED:
+                $color = '#cf000f'; // Red-ish
+            break;
+
+            case $this::FOR_PICKUP:
+            case $this::FOR_DELIVERY:
+            case $this::FOR_CASH_ON_DELIVERY:
+                $color = '#2aa3cc'; // Blue-ish
+            break;
+
+            case Booking::COMPLETED:
+                $color = '#009944'; // Green-ish
+            break;
+        }
+
+        return $color;
     }
 }

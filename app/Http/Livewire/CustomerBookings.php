@@ -11,6 +11,7 @@ class CustomerBookings extends Component
     {
         $bookings = Booking::where('user_id', auth()->user()->id)
             ->with(['bookingItems', 'bookingItems.services', 'paymentDetail'])
+            ->orderByDesc('id')
             ->get();
 
         return view('livewire.customer-bookings', compact('bookings'));

@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">status</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Customer</th>
                         <th scope="col">Pickup Date</th>
                         <th scope="col">Delivery Date</th>
