@@ -48,6 +48,20 @@ class Booking extends Model
         return $this->bookingItems->sum('pairs_of_shoes');
     }
 
+    public function scopeStatuses()
+    {
+        return [
+            self::PENDING,
+            self::DECLINED,
+            self::FOR_PICKUP,
+            self::PROCESSING,
+            self::AWAITING_PAYMENT,
+            self::FOR_DELIVERY,
+            self::FOR_CASH_ON_DELIVERY,
+            self::COMPLETED
+        ];
+    }
+
     public function getStatusColorAttribute(){
         $color = '#000000'; // Default color is Black
         switch ($this->status) {

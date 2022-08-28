@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,8 @@ Route::group([
         Route::resource('payment_methods', PaymentMethodController::class);
         Route::resource('vouchers', VoucherController::class);
 
+        Route::get('/reports',[ReportController::class, 'index'])->name('reports.index');
+        Route::post('/reports/generate',[ReportController::class, 'generate'])->name('reports.generate');
     });
 });
 
