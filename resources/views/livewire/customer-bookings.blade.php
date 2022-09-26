@@ -15,7 +15,7 @@
                 @forelse($bookings as $booking)
                     <div class="ourServices__item">
                         <div class="ourServices__item__info">
-                            <h3 class="ourServices__item__subtitle">Booking ID: {{ $booking->id }} | Status: <span style="color: {{ $booking->status_color }}">{{ $booking->status }}</span></h3>
+                            <h5 class="ourServices__item__subtitle">Booking ID: {{ $booking->id }} | Status: <span style="color: {{ $booking->status_color }}">{{ $booking->status }}</span></h5>
                             <h3 class="ourServices__item__subtitle">Payment Method: {{ ucwords($booking->paymentDetail->paymentMethod->name) }}</h3>
                             <h3 class="ourServices__item__subtitle" style="color: var(--green-1);">Total Price: PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) ?: 'Price' }}</h3>
                             @foreach ($booking->bookingItems as $item)

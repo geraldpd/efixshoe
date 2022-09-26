@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,6 +23,8 @@ class HomeController extends Controller
         //     dd($booking->bookingItems()->sum('pairs_of_shoes'));
         // }
 
-        return view('customer.home');
+        $user = User::findOrFail(auth()->user()->id);
+
+        return view('customer.home', compact('user'));
     }
 }
