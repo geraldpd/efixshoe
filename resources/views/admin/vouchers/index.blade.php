@@ -4,13 +4,13 @@
 <div class="container">
     <div class="row justify-content-center">
 
-        <h1>Vouchers</h1>
-
         @if(session()->has('message'))
             <div class="alert alert-info">
                 {{ session()->get('message') }}
             </div>
         @endif
+
+        <h1>Vouchers</h1>
 
         <div class="col-md-12">
 

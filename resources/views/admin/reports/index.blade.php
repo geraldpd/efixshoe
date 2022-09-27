@@ -4,14 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
 
-            <div class="col-md-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.vouchers.index') }}">Reports</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Generate</li>
-                    </ol>
-                </nav>
-            </div>
+            @if(session()->has('message'))
+                <div class="alert alert-info">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
+
+            <h1>Reports</h1>
 
             <div class="col-md-6 col-md-span-3">
 
@@ -26,8 +25,9 @@
                         <div class="form-group col-md-12 p-2">
                             <label for="count">Reports:</label>
                             <select name="report" id="report" class="form-select">
-                                <option value="bookings">Bookings</option>
-                                <option value="" disabled>Vouchers</option>
+                                @foreach ($reports as $report => $name)
+                                    <option value="{{ $report }}"> {{ $name }}</option>
+                                @endforeach
                             </select>
 
                             @if ($errors->has('count'))
@@ -37,41 +37,48 @@
                             @endif
                         </div>
 
-                        <br>
-                        <div class="form-group col-md-12 p-2">
-                            <label for="count">Status:</label>
-                            <select name="status" id="status" class="form-select">
-                                @foreach ($bookingStatuses as $status)
-                                    <option value="{{ $status }}">{{ $status }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <div class="bookings-filter row">
+                            <br>
+                            <div class="form-group col-md-12 p-2">
+                                <label for="count">Status:</label>
+                                <select name="status" id="status" class="form-select">
+                                    <option value="ALL">All</option>
+                                    @foreach ($grouped_statuses as $group => $statuses)
+                                        <optgroup label="{{ $group }}">
+                                            @foreach ($statuses as $status)
+                                                <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        <br>
+                            <br>
 
-                        <div class="form-group col-md-12 p-2">
-                            <label for="date_range">Date Range</label>
+                            <div class="form-group col-md-12 p-2">
+                                <label for="date_range">Date Range</label>
 
-                            <select name="date_range" id="date_range" class="form-select">
-                                <option value="today">Today</option>
-                                <option value="week">This Week</option>
-                                <option value="range">This Month</option>
-                                <option value="year">This Year</option>
-                                <option value="custom">Custom Range</option>
-                            </select>
+                                <select name="date_range" id="date_range" class="form-select">
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="range">This Month</option>
+                                    <option value="year">This Year</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
 
-                        </div>
+                            </div>
 
-                        <br>
+                            <br>
 
-                        <div class="form-group col-md-6 p-2" id="custom_date_range_from_div">
-                            <label for="date_range">From</label>
-                            <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
-                        </div>
+                            <div class="form-group col-md-6 p-2" id="custom_date_range_from_div">
+                                <label for="date_range">From</label>
+                                <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
+                            </div>
 
-                        <div class="form-group col-md-6 p-2" id="custom_date_range_to_div">
-                            <label for="date_range">To</label>
-                            <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
+                            <div class="form-group col-md-6 p-2" id="custom_date_range_to_div">
+                                <label for="date_range">To</label>
+                                <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
+                            </div>
                         </div>
 
                     </div>
@@ -105,6 +112,14 @@
     <script>
         let custom_from = document.getElementById('custom_date_range_from');
         let custom_to = document.getElementById('custom_date_range_to');
+
+        document.getElementById('report').addEventListener('change', function() {
+            if(this.value == 'bookings') {
+                document.getElementsByClassName('bookings-filter')[0].style.display = 'block';
+            } else {
+                document.getElementsByClassName('bookings-filter')[0].style.display = 'none';
+            }
+        });
 
         document.getElementById('date_range').addEventListener('change', function() {
             if(this.value == 'custom') {
