@@ -355,6 +355,12 @@ footer {
 .form__wrapper {
 	padding: 3rem 0;
 }
+.form_wrapper_duplicate {
+	padding: 3rem 0 0 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+}
 .form__wrapper form {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -396,6 +402,10 @@ footer {
 	}
 	.form__wrapper {
 		padding: 5rem 0;
+	}
+	.form_wrapper_duplicate{
+		padding: 5rem 0 0 0;
+		grid-template-columns: 1fr 1fr;
 	}
 	.form__wrapper form {
 		grid-template-columns: 1fr 1fr;
