@@ -26,7 +26,7 @@ An Online Shoe Care and Services in Metro Vigan
 - [x] Bookings (List)
 - [ ] Bookings (Calendar)
 - [ ] Vouchers Management
-- [ ] Reports
+- [x] Reports
 - [ ] Email Notifications (if approved/decline/cancelled/refund booking)
 
 ## Booking Statuses
