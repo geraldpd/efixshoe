@@ -20,7 +20,7 @@
                             <p class="ourServices__item__text">Service(s): {{ implode(", ", $item->options->services) }}</p>
                         </div>
 
-                        <a href="#" class="btn" wire:click="removeItemInCart('{{ $item->rowId }}')">Remove Item</a>
+                        <a href="#" class="btn" onclick="confirm('Are you sure you want to remove this item from your cart?') || event.stopImmediatePropagation()" wire:click="removeItemInCart('{{ $item->rowId }}')">Remove Item</a>
                     </div>
                 @empty
                     <div class="ourServices__item">
