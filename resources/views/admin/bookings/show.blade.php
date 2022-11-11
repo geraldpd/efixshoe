@@ -82,9 +82,11 @@
                             <dt class="col-sm-3">Payment Mode:</dt>
                             <dd class="col-sm-9">{{ $booking->paymentDetail->paymentMethod->name }}</dd>
 
-                            @if($booking->paymentDetail->payment_method_id != 1)
+                            @if($booking->paymentDetail->payment_method_id != 1 && $booking->paymentDetail->receipt_attachment)
                                 <dt class="col-sm-3">Payment Attachment:</dt>
-                                <dd class="col-sm-9">{{ $booking->paymentDetail->paymentMethod->receipt_attachment }}</dd>
+                                <dd class="col-sm-9">
+                                    <a href="{{ asset($booking->paymentDetail->receipt_attachment) }}" target="_blank">Click to View</a>
+                                </dd>
                             @endif
                         </dl>
                     </div>
