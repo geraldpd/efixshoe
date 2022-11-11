@@ -9,24 +9,26 @@ use Livewire\Component;
 
 class Booking extends Component
 {
-    public int $quantity = 1;
+    public $quantity;
 
     public array $selectedServices = [];
 
     public $services;
 
-    protected $rules = [
-        'quantity' => ['required', 'integer', 'min:1', 'max:10'],
-        'selectedServices' => ['array', 'required', 'exists:App\Models\Service,id,is_active,1']
-    ];
-
     protected $messages = [
-        'selectedServices.exists' => 'Selected Service(s) are invalid.'
+        'quantity.*.required' => 'Quantity is required.',
+        'quantity.*.integer' => 'Quantity should be a numeric value.',
+        'quantity.*.min' => 'Minimum Quantity is 1.',
+        'quantity.*.max' => 'Quantity should not exceed 10.'
     ];
 
     public function mount()
     {
         $this->services = Service::all();
+
+        foreach( $this->services as $service ){
+            $this->quantity[$service->id] = 1;
+        }
     }
 
     public function render()
@@ -34,20 +36,20 @@ class Booking extends Component
         return view('livewire.booking');
     }
 
-    public function addToMyCart()
+    public function addToMyCart($serviceId)
     {
-        $this->validate();
+        $this->validate([
+            'quantity.'.$serviceId => ['required', 'integer', 'min:1', 'max:10']
+        ]);
 
-        $services = Service::whereIn('id', $this->selectedServices)->get();
-
-        // $totalPrice = $this->quantity * $services->sum('cost');
+        $services = Service::where('id', $serviceId)->get();
 
         $hash = md5(rand(1, 999999));
 
         Cart::add([
             'id' => $hash,
             'name' => 'Booking #' . $hash,
-            'qty' => $this->quantity,
+            'qty' => $this->quantity[$serviceId],
             'price' => $services->sum('cost'),
             'weight' => 0,
             'options' => [
@@ -55,7 +57,9 @@ class Booking extends Component
             ]
         ]);
 
-        $this->selectedServices = [];
+        foreach( $this->services as $service ){
+            $this->quantity[$service->id] = 1;
+        }
 
         session()->flash('success', 'Successfully added to cart.');
 

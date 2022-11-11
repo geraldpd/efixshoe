@@ -8,6 +8,7 @@ use App\Http\Requests\PaymentMethod\{
     StoreRequest,
     UpdateRequest
 };
+use Illuminate\Support\Facades\Storage;
 
 class PaymentMethodController extends Controller
 {
@@ -41,7 +42,20 @@ class PaymentMethodController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $payment_method = PaymentMethod::create($request->validated());
+        $payment_method = PaymentMethod::create($request->except('image'));
+
+        if($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+
+            Storage::disk('root_public')->putFileAs(
+                'pm_images', $image, $payment_method->id.'.'.$extension
+            );
+
+            $payment_method->image = "pm_images/$payment_method->id.$extension";
+            $payment_method->save();
+        }
 
         return redirect()->route('admin.payment_methods.show', [$payment_method])->with('message', 'Payment Method Successfully Created');
     }
@@ -77,10 +91,22 @@ class PaymentMethodController extends Controller
      */
     public function update(UpdateRequest $request, PaymentMethod $payment_method)
     {
-        $data = $request->validated();
+        $data = $request->except('image');
 
         if(! $request->has('is_active')) {
             $data['is_active'] = 0;
+        }
+
+        if($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $extension = $image->getClientOriginalExtension();
+
+            Storage::disk('root_public')->putFileAs(
+                'pm_images', $image, $payment_method->id.'.'.$extension
+            );
+
+            $payment_method->image =  "pm_images/$payment_method->id.$extension";
         }
 
         $payment_method->update($data);

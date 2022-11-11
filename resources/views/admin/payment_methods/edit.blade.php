@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Edit</li>
                 </ol>
             </nav>
-            <form method="POST" action="{{ route('admin.payment_methods.update', [$payment_method]) }}">
+            <form method="POST" action="{{ route('admin.payment_methods.update', [$payment_method]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -57,6 +57,23 @@
                         @endif
                     </div>
                 </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="image" name="image">
+
+                        @if ($errors->has('image'))
+                            <small class="help-block text-danger">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </small>
+                        @endif
+                    </div>
+                </div>
+
+                <br>
 
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="1" name="is_active" id="is_active" {{ $payment_method->is_active ? 'checked' : '' }}>

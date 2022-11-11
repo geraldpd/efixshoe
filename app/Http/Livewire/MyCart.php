@@ -9,10 +9,15 @@ use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class MyCart extends Component
 {
+    use WithFileUploads;
+    
     public $open = '08:00'; // Tentative opening hour: 8am
 
     public $close = '18:00'; // Tentative closing hour: 6pm
@@ -30,6 +35,12 @@ class MyCart extends Component
     public $services;
 
     public $paymentMethods;
+
+    public $receipt;
+
+    public $showReceiptDiv = false;
+
+    public $paymentMethodDetails;
 
     public array $slots = [
         1 => '8am to 9am',
@@ -86,6 +97,17 @@ class MyCart extends Component
         return view('livewire.my-cart', compact('cartItems'));
     }
 
+    public function change()
+    {
+        if( in_array($this->selectedModeOfPayment, $this->paymentMethods->where('name', '!=', 'Cash')->pluck('id')->toArray()) ){
+            $this->showReceiptDiv = true;
+            $this->paymentMethodDetails = $this->paymentMethods->where('id', $this->selectedModeOfPayment)->first();
+        }
+        else{
+            $this->showReceiptDiv = false;
+        }
+    }
+
     public function removeItemInCart($rowId)
     {
         Cart::remove($rowId);
@@ -97,6 +119,18 @@ class MyCart extends Component
 
     public function checkout()
     {
+        $this->validate([
+            'receipt' => ['mimes:jpeg,jpg,png', 'max:5000']
+        ]);
+        
+        $name = Str::random(16);
+        $extension = $this->receipt->getClientOriginalExtension();
+        $filename = $name.'.'.$extension;
+
+        Storage::disk('root_public')->putFileAs(
+            'receipts', $this->receipt, $filename
+        );
+
         $cartItems = Cart::content();
         $cartPriceTotal = Cart::priceTotal(2, ".", "");
 
@@ -126,17 +160,10 @@ class MyCart extends Component
             $bookingItem->services()->attach(array_keys($items->options->services));
         }
 
-        // foreach(array_unique(Arr::flatten($services)) as $service){
-        //     $booking->bookingServices()->create([
-        //         'service_id' => $service
-        //     ]);
-        // }
-
-        // $booking->services()->attach(array_unique(Arr::flatten($services)));
-
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,
-            'total_cost' => (float) $cartPriceTotal * 100
+            'total_cost' => (float) $cartPriceTotal * 100,
+            'receipt_attachment' => "receipts/$filename"
         ]);
 
         Cart::destroy();

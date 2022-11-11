@@ -70,21 +70,49 @@
 
                         <div class="form__group">
                             <label for="mode_of_payment">Mode of Payment</label>
-                            <select name="mode_of_payment" id="mode_of_payment" wire:model="selectedModeOfPayment" required>
+                            <select name="mode_of_payment" id="mode_of_payment" wire:model="selectedModeOfPayment" wire:change="change" required>
                                 <option value=''>--Choose Mode of Payment--</option>
                                 @foreach($paymentMethods as $paymentMethod)
                                     <option value="{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</option>
                                 @endforeach
                             </select>
-                            <p class="subtitle-success"><strong>Note: After successful booking, please go to your Account page to process your payment (if using GCash/PayMaya/Bank Transfer).</strong></p>
 
                             @error('mode_of_payment')
                                 <p class="error-message"><strong>{{ $message }}</strong></p>
                             @enderror
                         </div>
 
-                        <br>
-                        <button type="submit" class="btn primary-btn" style="margin-top: 3rem;">Checkout</button>
+                        <div class="form__group">
+                        </div>
+
+                        @if( $showReceiptDiv )
+                            <div class="form__group">
+                                <label for="receipt">Upload Receipt</label>
+                                <input type="file" wire:model="receipt" style="background-color: none !important;">
+                                <p class="subtitle-success">
+                                    <strong>Note: If using GCash/PayMaya/Bank Transfer, kindly transfer the exact amount to the Account details displayed and upload your receipt.</strong>
+                                </p>
+
+                                @error('receipt')
+                                    <p class="error-message"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            </div>
+
+                            @if( $paymentMethodDetails )
+                                <div class="form__group" style="text-align: center !important;">
+                                    <h3 class="ourServices__item__text">Account Name: {{ $paymentMethodDetails->account_name }}</h3>
+                                    <h3 class="ourServices__item__text">Account Number: {{ $paymentMethodDetails->account_number }}</h3>
+                                    <br>
+                                    @if( $paymentMethodDetails->image )
+                                        <img src="{{ asset($paymentMethodDetails->image) }}" style="height: 400px !important;">
+                                    @endif
+                                </div>
+                            @endif
+                        @endif
+
+                        <div class="form__group form__group__full">
+                            <button type="submit" class="btn primary-btn" style="margin-top: 3rem;">Checkout</button>
+                        </div>
                     </form>
                 </div>
             @else

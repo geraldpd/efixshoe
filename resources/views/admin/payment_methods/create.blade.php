@@ -13,7 +13,7 @@
                 </ol>
             </nav>
 
-            <form method="POST" action="{{ route('admin.payment_methods.store') }}">
+            <form method="POST" action="{{ route('admin.payment_methods.store') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
@@ -52,6 +52,21 @@
                         @if ($errors->has('name'))
                             <small class="help-block text-danger">
                                 <strong>{{ $errors->first('name') }}</strong>
+                            </small>
+                        @endif
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="image" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="image" name="image">
+
+                        @if ($errors->has('image'))
+                            <small class="help-block text-danger">
+                                <strong>{{ $errors->first('image') }}</strong>
                             </small>
                         @endif
                     </div>
