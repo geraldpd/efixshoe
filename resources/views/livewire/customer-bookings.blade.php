@@ -23,10 +23,6 @@
                             @endforeach
                             <br>
                         </div>
-            
-                        @if ($booking->paymentDetail->paymentMethod->name != 'Cash' && $booking->status == 'PENDING')
-                            <a class="btn" href="#">Upload Payment</a>
-                        @endif
                     </div>
                 @empty
                     <div class="ourServices__item">
