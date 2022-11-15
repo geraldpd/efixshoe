@@ -35,6 +35,8 @@
 
     <script src="//unpkg.com/alpinejs" defer></script>
     @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <x-livewire-alert::scripts />
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 </body>

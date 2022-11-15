@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class MyCart extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, LivewireAlert;
     
     public $open = '08:00'; // Tentative opening hour: 8am
 
@@ -99,9 +100,10 @@ class MyCart extends Component
 
     public function change()
     {
+        $this->paymentMethodDetails = $this->paymentMethods->where('id', $this->selectedModeOfPayment)->first();
+
         if( in_array($this->selectedModeOfPayment, $this->paymentMethods->where('name', '!=', 'Cash')->pluck('id')->toArray()) ){
             $this->showReceiptDiv = true;
-            $this->paymentMethodDetails = $this->paymentMethods->where('id', $this->selectedModeOfPayment)->first();
         }
         else{
             $this->showReceiptDiv = false;
@@ -114,28 +116,41 @@ class MyCart extends Component
 
         $this->emit('cart_updated');
 
-        session()->flash('success', 'Item successfully removed in your cart.');
+        $this->alert('success', 'Item successfully removed in your cart.', [
+            'position' => 'center',
+            'toast' => false,
+            'timer' => 1000
+        ]);
     }
 
     public function checkout()
     {
-        $this->validate([
-            'receipt' => ['mimes:jpeg,jpg,png', 'max:5000']
-        ]);
-        
-        $name = Str::random(16);
-        $extension = $this->receipt->getClientOriginalExtension();
-        $filename = $name.'.'.$extension;
+        $filename = null;
 
-        Storage::disk('root_public')->putFileAs(
-            'receipts', $this->receipt, $filename
-        );
+        if( $this->paymentMethodDetails->name != 'Cash' ){
+            $this->validate([
+                'receipt' => ['required', 'mimes:jpeg,jpg,png', 'max:5000']
+            ]);
+
+            $name = Str::random(16);
+            $extension = $this->receipt->getClientOriginalExtension();
+            $filename = $name.'.'.$extension;
+
+            Storage::disk('root_public')->putFileAs(
+                'receipts', $this->receipt, $filename
+            );
+        }
 
         $cartItems = Cart::content();
         $cartPriceTotal = Cart::priceTotal(2, ".", "");
 
         if( $cartItems->count() == 0 || !array_key_exists($this->selectedPickupSlot, $this->times) || !array_key_exists($this->selectedDeliverySlot, $this->times) ){
-            session()->flash('error', 'An error occurred while processing your request.');
+            $this->alert('error', 'An error occurred while processing your request.', [
+                'position' => 'center',
+                'toast' => false,
+                'timer' => 1500
+            ]);
+
             $this->emit('cart_updated');
         }
 
@@ -163,7 +178,7 @@ class MyCart extends Component
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,
             'total_cost' => (float) $cartPriceTotal * 100,
-            'receipt_attachment' => "receipts/$filename"
+            'receipt_attachment' => ($filename) ? "receipts/$filename" : null
         ]);
 
         Cart::destroy();
@@ -171,6 +186,12 @@ class MyCart extends Component
         $this->reset();
 
         session()->flash('success', 'Thank you for your booking with us. You can view the details on your Account page.');
+
+        $this->alert('success', 'Booking submitted.', [
+            'position' => 'center',
+            'toast' => false,
+            'timer' => 1500
+        ]);
 
         $this->emit('cart_updated');
     }

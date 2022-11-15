@@ -4,11 +4,13 @@ namespace App\Http\Livewire;
 
 use App\Models\Service;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Http\Request;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class Booking extends Component
 {
+    use LivewireAlert;
+
     public $quantity;
 
     public array $selectedServices = [];
@@ -27,7 +29,7 @@ class Booking extends Component
         $this->services = Service::all();
 
         foreach( $this->services as $service ){
-            $this->quantity[$service->id] = 1;
+            $this->quantity[$service->id] = 0;
         }
     }
 
@@ -58,10 +60,14 @@ class Booking extends Component
         ]);
 
         foreach( $this->services as $service ){
-            $this->quantity[$service->id] = 1;
+            $this->quantity[$service->id] = 0;
         }
 
-        session()->flash('success', 'Successfully added to cart.');
+        $this->alert('success', 'Successfully added to cart.', [
+            'position' => 'center',
+            'toast' => false,
+            'timer' => 1500
+        ]);
 
         $this->emit('cart_updated');
     }
