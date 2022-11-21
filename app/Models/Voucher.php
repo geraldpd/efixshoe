@@ -17,10 +17,12 @@ class Voucher extends Model
      */
     protected $fillable = [
         'code',
-        'service_id',
-        'batch',
+        'type',
+        'quantity',
+        'remaining',
+        'amount',
         'is_used',
-        'expiry_date',
+        'expiry_date'
     ];
 
     /**

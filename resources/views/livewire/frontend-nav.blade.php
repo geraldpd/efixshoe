@@ -8,6 +8,7 @@
     @else
         <li><a class="nav__link" href="{{ route('customer.home') }}">My Account</a></li>
         <li><a class="nav__link" href="{{ route('customer.cart.content') }}">My Cart ({{ $cartCount }})</a></li>
+        <li><a class="nav__link" href="{{ route('customer.home') }}">Hi, {{ ($user->first_name) ? ucwords($user->first_name) : 'User' }}!</a></li>
         <li>
             <a class="nav__link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -15,5 +16,4 @@
             </form>
         </li>
     @endguest
-    <li><a href="{{ route('customer.booking') }}" class="btn primary-btn">Book A Service</a></li>
 </div>

@@ -34,8 +34,20 @@
 
             @if( Cart::count() > 0 )
                 <h2 class="page__subtitle__text" style="text-align: right;">
-                    Total: PHP {{ Cart::priceTotal() }}
+                    Total: PHP {{ $priceTotal }}
                 </h2>
+                <br>
+                @if( $discount != 0 )
+                    <h2 class="page__subtitle" style="text-align: right;">
+                        Sub Total: PHP {{ $subTotal }}
+                    </h2>
+                    <br>
+                    <h5 class="page__subtitle" style="text-align: right;">
+                        Discount: PHP {{ $discount }}
+                    </h5>
+                @endif
+                
+                <br>
 
                 <div class="form__wrapper">
                     <form wire:submit.prevent="checkout" method="POST" action="{{ route('customer.checkout') }}">
@@ -83,6 +95,23 @@
                         </div>
 
                         <div class="form__group">
+                            <div class="form__group">
+                                <label for="voucher">Voucher</label>
+                                <input type="text" wire:model="voucher" placeholder="Input Voucher" {{ $isVoucherApplied ? "readonly" : '' }}>
+
+                                @if( $voucher && !$isVoucherApplied )
+                                    <br><br><a href="#" class="btn primary-btn" wire:click="applyVoucher">Apply voucher</a>
+                                @elseif( $voucher && $isVoucherApplied )
+                                    <p class="subtitle-success">
+                                        <strong>Voucher applied!</strong>
+                                    </p>
+                                    <a href="#" class="btn primary-btn" style="background: #d9534f !important; color: white !important;" wire:click="removeVoucher">Remove voucher</a>
+                                @endif
+
+                                @error('voucher')
+                                    <p class="error-message"><strong>{{ $message }}</strong></p>
+                                @enderror
+                            </div>
                         </div>
 
                         @if( $showReceiptDiv )

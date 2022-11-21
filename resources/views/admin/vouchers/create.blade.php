@@ -16,10 +16,6 @@
             <form method="POST" action="{{ route('admin.vouchers.store') }}">
                 @csrf
 
-                @if($errors->any())
-                    {{ implode('', $errors->all('<div>:message</div>')) }}
-                @endif
-
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="count">Count</label>
@@ -50,13 +46,14 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="service_id">Service</label>
-                        <select id="service_id" name="service_id" class="form-control">
-                            <option value=""> Select Service </option>
-                            @foreach ($services as $service)
-                                <option value="{{ $service->id }}"> {{ $service->name }} </option>
-                            @endforeach
-                        </select>
+                        <label for="amound">Percent Amount</label>
+                        <input name="amount" type="text" class="form-control" id="amount" placeholder="How much discount? (e.g. Input 10 = 10% discount)" value="{{ old('amount') }}" required>
+
+                        @if ($errors->has('amount'))
+                            <small class="help-block text-danger">
+                                <strong>{{ $errors->first('amount') }}</strong>
+                            </small>
+                        @endif
                     </div>
 
                     <br>

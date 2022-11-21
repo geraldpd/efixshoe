@@ -12,6 +12,7 @@ class FrontendNav extends Component
     public function render()
     {
         $cartCount = Cart::content()->count();
-        return view('livewire.frontend-nav', compact('cartCount'));
+        $user = request()->user();
+        return view('livewire.frontend-nav', compact('cartCount', 'user'));
     }
 }

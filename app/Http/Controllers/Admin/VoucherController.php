@@ -46,24 +46,16 @@ class VoucherController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $vouchers = [];
-        $codes = VoucherService::generateCode($request->count, $request->prefix);
-        $batch = Voucher::latest()->first()?->batch ?? 0;
+        $codes = VoucherService::generateCode(1, $request->prefix);
 
-
-        foreach($codes as $code) {
-            $vouchers[] = [
-                'code' => $code,
-                'service_id' => $request->service_id,
-                'batch' => $batch + 1,
-                'is_used' => false,
-                'expiry_date' => $request->filled ('expiry_date') ? Carbon::parse($request->expiry_date) : null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ];
-        }
-
-        Voucher::insert($vouchers);
+        Voucher::create([
+            'code' => $codes[0],
+            'quantity' => $request->count,
+            'remaining' => $request->count,
+            'amount' => $request->amount,
+            'is_used' => false,
+            'expiry_date' => $request->filled('expiry_date') ? Carbon::parse($request->expiry_date) : null
+        ]);
 
         return redirect()->route('admin.vouchers.index')->with('message', 'Voucher(s) Successfully Created');
     }

@@ -59,9 +59,7 @@ class Booking extends Component
             ]
         ]);
 
-        foreach( $this->services as $service ){
-            $this->quantity[$service->id] = 0;
-        }
+        $this->quantity[$serviceId] = 0;
 
         $this->alert('success', 'Successfully added to cart.', [
             'position' => 'center',

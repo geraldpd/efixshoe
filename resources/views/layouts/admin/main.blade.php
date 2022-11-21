@@ -44,9 +44,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.payment_methods.index') }}">{{ __('Payment Methods') }}</a>
                         </li>
-                        {{-- <li class="nav-item">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.vouchers.index') }}">{{ __('Vouchers') }}</a>
-                        </li> --}}
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.reports.index') }}">{{ __('Reports') }}</a>
                         </li>

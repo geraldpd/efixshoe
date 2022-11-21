@@ -13,6 +13,8 @@ class PaymentDetail extends Model
         'booking_id',
         'payment_method_id',
         'total_cost',
+        'discount',
+        'voucher_code',
         'receipt_attachment'
     ];
 

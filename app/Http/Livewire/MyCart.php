@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Booking;
 use App\Models\PaymentMethod;
 use App\Models\Service;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
@@ -38,6 +39,16 @@ class MyCart extends Component
     public $paymentMethods;
 
     public $receipt;
+
+    public $voucher;
+
+    public $priceTotal;
+
+    public $subTotal;
+
+    public $discount;
+
+    public $isVoucherApplied = false;
 
     public $showReceiptDiv = false;
 
@@ -73,11 +84,15 @@ class MyCart extends Component
     {
         $this->services = Service::all();
         $this->paymentMethods = PaymentMethod::where('is_active', 1)->get();
+        Cart::setGlobalDiscount(0);
+        $this->discount = 0;
     }
 
     public function render()
     {
         $cartItems = Cart::content();
+        $this->subTotal = Cart::priceTotal();
+        $this->priceTotal = Cart::subTotal();
 
         if( $cartItems->count() == 0 ){
             return view('livewire.my-cart', compact('cartItems'));
@@ -123,6 +138,59 @@ class MyCart extends Component
         ]);
     }
 
+    public function applyVoucher()
+    {
+        $voucher = Voucher::where('code', $this->voucher)->first();
+
+        if( !$voucher ){
+            $this->alert('warning', 'Voucher is not valid.', [
+                'position' => 'center',
+                'toast' => false,
+                'timer' => 1500
+            ]);
+            
+            return;
+        }
+
+        $userBookingsWithGivenVoucher = request()->user()->bookings()->whereHas('paymentDetail', function($query) {
+            $query->where('voucher_code', $this->voucher);
+        })->count();
+
+        if( $voucher->is_used || $voucher->remaining == 0 || $userBookingsWithGivenVoucher >= 1 ){
+            $this->alert('warning', 'Voucher has already been used.', [
+                'position' => 'center',
+                'toast' => false,
+                'timer' => 1500
+            ]);
+            
+            return;
+        }
+
+        if( now() > $voucher->expiry_date ){
+            $this->alert('warning', 'Voucher is ready expired.', [
+                'position' => 'center',
+                'toast' => false,
+                'timer' => 1500
+            ]);
+            
+            return;
+        }
+
+        Cart::setGlobalDiscount($voucher->amount);
+        $this->subTotal = Cart::priceTotal();
+        $this->discount = Cart::discount();
+        $this->isVoucherApplied = true;
+    }
+
+    public function removeVoucher()
+    {
+        $this->voucher = null;
+        Cart::setGlobalDiscount(0);
+        $this->subTotal = Cart::priceTotal();
+        $this->discount = Cart::discount();
+        $this->isVoucherApplied = false;
+    }
+
     public function checkout()
     {
         $filename = null;
@@ -143,6 +211,7 @@ class MyCart extends Component
 
         $cartItems = Cart::content();
         $cartPriceTotal = Cart::priceTotal(2, ".", "");
+        $discount = Cart::discount(2, ".", "");
 
         if( $cartItems->count() == 0 || !array_key_exists($this->selectedPickupSlot, $this->times) || !array_key_exists($this->selectedDeliverySlot, $this->times) ){
             $this->alert('error', 'An error occurred while processing your request.', [
@@ -178,8 +247,20 @@ class MyCart extends Component
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,
             'total_cost' => (float) $cartPriceTotal * 100,
+            'discount' => (float) $discount * 100,
+            'voucher_code' => $this->voucher,
             'receipt_attachment' => ($filename) ? "receipts/$filename" : null
         ]);
+
+        $voucher = Voucher::where('code', $this->voucher)->first();
+
+        if( $voucher && $voucher->remaining > 0 && !$voucher->is_used ){
+            $voucher->remaining = $voucher->remaining - 1;
+            if( $voucher->remaining == 0 ){
+                $voucher->is_used = true;
+            }
+            $voucher->save();
+        }
 
         Cart::destroy();
 

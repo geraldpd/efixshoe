@@ -24,9 +24,10 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Code</th>
-                        <th scope="col">Is Used</th>
-                        <th scope="col">Batch</th></th>
-                        <th scope="col">Expiry Date</th>
+                        <th scope="col">Percent Amount</th></th>
+                        <th scope="col">Quantity</th></th>
+                        <th scope="col">Remaining</th></th>
+                        <th scope="col">Expiry Date</th></th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -35,14 +36,15 @@
                         <tr>
                             <td>{{ $voucher->id }}</td>
                             <td>{{ $voucher->code }}</td>
-                            <td>{{ $voucher->is_used ? 'Yes' : 'No' }}</td>
-                            <td>{{ $voucher->batch }}</td>
-                            <td>{{ $voucher->expiry_date ?? 'None'}}</td>
-                            <td>action</td>
+                            <td>{{ $voucher->amount }}%</td>
+                            <td>{{ $voucher->quantity }}</td>
+                            <td>{{ $voucher->remaining }}</td>
+                            <td>{{ $voucher->expiry_date ? $voucher->expiry_date->format('Y-m-d') : 'None'}}</td>
+                            <td>-</td>
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center" colspan="6">No Voucher</td>
+                            <td class="text-center" colspan="7">No Voucher</td>
                         </tr>
                     @endforelse
                 </tbody>

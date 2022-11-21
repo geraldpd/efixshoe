@@ -7,6 +7,9 @@
         <h2 class="page__title__text">
             Our Services
         </h2>
+
+        <br>
+        <a href="{{ route('customer.booking') }}" class="btn primary-btn">Book A Service</a>
     </div>
 </section>
 

@@ -25,10 +25,9 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'service_id' => ['nullable', 'exists:services,id'],
             'prefix' => ['nullable'],
-            'is_used' => ['boolean'],
             'count' => ['required', 'min:1', 'max:1000'],
+            'amount' => ['required', 'min:1', 'max:1000'],
             'expiry_date' => ['nullable', 'date']
         ];
     }
