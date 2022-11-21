@@ -211,6 +211,7 @@ class MyCart extends Component
 
         $cartItems = Cart::content();
         $cartPriceTotal = Cart::priceTotal(2, ".", "");
+        $cartSubTotal = Cart::subTotal(2, ".", "");
         $discount = Cart::discount(2, ".", "");
 
         if( $cartItems->count() == 0 || !array_key_exists($this->selectedPickupSlot, $this->times) || !array_key_exists($this->selectedDeliverySlot, $this->times) ){
@@ -246,7 +247,9 @@ class MyCart extends Component
 
         $booking->paymentDetail()->create([
             'payment_method_id' => $this->selectedModeOfPayment,
-            'total_cost' => (float) $cartPriceTotal * 100,
+            'total_cost' => ($this->discount != 0) 
+                ? (float) $cartSubTotal * 100 
+                : (float) $cartPriceTotal * 100,
             'discount' => (float) $discount * 100,
             'voucher_code' => $this->voucher,
             'receipt_attachment' => ($filename) ? "receipts/$filename" : null
