@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\PaymentMethod;
 use App\Models\Service;
 use App\Models\Voucher;
+use App\Notifications\NewBooking;
 use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
@@ -268,6 +269,8 @@ class MyCart extends Component
         Cart::destroy();
 
         $this->reset();
+
+        request()->user()->notify(new NewBooking($booking));
 
         session()->flash('success', 'Thank you for your booking with us. You can view the details on your Account page.');
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Notifications\UpdateBookingStatus;
 
 class BookingController extends Controller
 {
@@ -37,6 +38,7 @@ class BookingController extends Controller
                 }
                 else{
                     $statuses[] = 'AWAITING PAYMENT';
+                    $statuses[] = 'PROCESSING';
                 }
             break;
 
@@ -84,6 +86,8 @@ class BookingController extends Controller
     {
         $booking->status = $request->status;
         $booking->save();
+
+        $booking->customer->notify(new UpdateBookingStatus($booking));
 
         return redirect()->back()->with('message', 'Booking Successfully Updated');
 
