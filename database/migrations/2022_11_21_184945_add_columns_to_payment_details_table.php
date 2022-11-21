@@ -14,8 +14,8 @@ class AddColumnsToPaymentDetailsTable extends Migration
     public function up()
     {
         Schema::table('payment_details', function (Blueprint $table) {
-            $table->bigInteger('discount')->after('total_cost');
-            $table->text('voucher_code')->after('discount');
+            $table->bigInteger('discount')->after('total_cost')->nullable();
+            $table->text('voucher_code')->after('discount')->nullable();
         });
     }
 
