@@ -166,7 +166,7 @@ class MyCart extends Component
             return;
         }
 
-        if( now() > $voucher->expiry_date ){
+        if( $voucher->expiry_date && (now() > $voucher->expiry_date) ){
             $this->alert('warning', 'Voucher is ready expired.', [
                 'position' => 'center',
                 'toast' => false,
