@@ -40,7 +40,7 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        return '/customer';
+        return '/home';
     }
 
 }
