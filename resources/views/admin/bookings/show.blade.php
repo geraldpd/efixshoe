@@ -65,9 +65,18 @@
                                             <button  class="btn btn-primary" type="submit" for="status">Update</button>
                                         </div>
 
+                                        <div id="div_decline_reason" style="display: none;">
+                                            <label for="">Decline Reason (Optional)</label>
+                                            <input type="text" id="decline_reason" name="decline_reason">
+                                        </div>
+
                                     </form>
                                 @else
                                     <h2>{{ $booking->status }}</h2>
+
+                                    @if( $booking->status == 'DECLINED' )
+                                        <b>Decline Reason: {{ $booking->decline_reason ?: 'N/A' }}</b>
+                                    @endif
                                 @endif
                             </dd>
 
@@ -141,4 +150,20 @@
             background: repeating-linear-gradient(90deg,#000,#000 6px,transparent 6px,transparent 12px);
         }
     </style>
+@endpush
+
+@push('scripts')
+    <script>
+        document.getElementById('decline_reason').value = '';
+
+        document.getElementById('status').addEventListener('change', function() {
+            if( this.value == 'DECLINED' ){
+                document.getElementById('div_decline_reason').style.display = 'block';
+            }
+            else{
+                document.getElementById('div_decline_reason').style.display = 'none';
+                document.getElementById('decline_reason').value = '';
+            }
+        });
+    </script>
 @endpush

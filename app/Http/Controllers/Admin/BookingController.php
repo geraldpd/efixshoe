@@ -85,6 +85,11 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         $booking->status = $request->status;
+
+        if( $request->status == 'DECLINED' ){
+            $booking->decline_reason = $request->decline_reason;
+        }
+
         $booking->save();
 
         $booking->customer->notify(new UpdateBookingStatus($booking));

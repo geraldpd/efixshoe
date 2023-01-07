@@ -21,6 +21,7 @@ class Booking extends Model
     protected $fillable = [
         'user_id',
         'status',
+        'decline_reason',
         'pickup_date',
         'delivery_date'
     ];

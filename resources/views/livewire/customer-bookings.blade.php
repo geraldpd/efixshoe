@@ -22,6 +22,9 @@
                                 <p class="ourServices__item__text">Pairs of Shoes: {{ $item->pairs_of_shoes }} | Service(s): {{ implode(", ", $item->services->pluck('name')->toArray()) }}</p>
                             @endforeach
                             <br>
+                            @if( $booking->status == 'DECLINED' )
+                                <p class="ourServices__item__text">Decline Reason: {{ $booking->decline_reason ?: 'N/A' }}</p>
+                            @endif
                         </div>
                     </div>
                 @empty
