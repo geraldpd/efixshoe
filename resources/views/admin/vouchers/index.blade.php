@@ -28,7 +28,6 @@
                         <th scope="col">Quantity</th></th>
                         <th scope="col">Remaining</th></th>
                         <th scope="col">Expiry Date</th></th>
-                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,7 +39,6 @@
                             <td>{{ $voucher->quantity }}</td>
                             <td>{{ $voucher->remaining }}</td>
                             <td>{{ $voucher->expiry_date ? $voucher->expiry_date->format('Y-m-d') : 'None'}}</td>
-                            <td>-</td>
                         </tr>
                     @empty
                         <tr>
