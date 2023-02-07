@@ -34,7 +34,7 @@ class BookingController extends Controller
             case Booking::PENDING:
                 $statuses = ['DECLINED'];
                 if( $booking->paymentDetail->paymentMethod->name == 'Cash' ){
-                    $statuses[] = 'FOR PICKUP';
+                    $statuses[] = 'APPROVED FOR PICKUP';
                 }
                 else{
                     $statuses[] = 'AWAITING PAYMENT';
@@ -65,7 +65,7 @@ class BookingController extends Controller
             case Booking::FOR_DELIVERY:
             case Booking::FOR_CASH_ON_DELIVERY:
                 $statuses = [
-                    'COMPLETED'
+                    'DELIVERED'
                 ];
             break;
 

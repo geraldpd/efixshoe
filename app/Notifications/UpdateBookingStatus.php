@@ -48,9 +48,9 @@ class UpdateBookingStatus extends Notification
             $text = "Your booking has been declined due to unavailability of services. We will contact you for any payment-related concerns. Thank you for your kind consideration.";
         }
 
-        if( $this->booking->status == 'COMPLETED' ){
-            $subject = 'Booking Completed';
-            $text = "Your booking has been completed. Please contact us if you have any concerns. Thank you.";
+        if( $this->booking->status == 'DELIVERED' ){
+            $subject = 'Booking Delivered';
+            $text = "Your booking has been delivered. Please contact us if you have any concerns. Thank you.";
         }
 
         return (new MailMessage)

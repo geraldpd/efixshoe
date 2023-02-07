@@ -31,7 +31,7 @@
 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Cost: <b>{{ $service->cost }}</b></li>
-                    <li class="list-group-item">Turnaround Time:  <b>{{ $service->turnaround_time }} day(s)</b></li>
+                    <li class="list-group-item">Turnaround Days:  <b>{{ $service->turnaround_time }} day(s)</b></li>
                     <li class="list-group-item">{{ $service->is_active ? 'ACTIVE'  : 'INACTIVE' }}</li>
                 </ul>
 

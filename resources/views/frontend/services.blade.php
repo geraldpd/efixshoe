@@ -9,7 +9,7 @@
         </h2>
 
         <br>
-        <a href="{{ route('customer.booking') }}" class="btn primary-btn">Book A Service</a>
+        <a href="{{ route('customer.booking') }}" class="btn primary-btn">Avail A Service</a>
     </div>
 </section>
 

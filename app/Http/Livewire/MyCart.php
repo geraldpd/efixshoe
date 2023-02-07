@@ -81,6 +81,12 @@ class MyCart extends Component
         10 => '17'
     ];
 
+    public $rowCartId;
+
+    protected $listeners = [
+        'removedItemInCart'
+    ];
+
     public function mount()
     {
         $this->services = Service::all();
@@ -128,7 +134,21 @@ class MyCart extends Component
 
     public function removeItemInCart($rowId)
     {
-        Cart::remove($rowId);
+        $this->confirm('Are you sure you want to remove this item from your cart?', [
+            'confirmButtonText' => 'Yes',
+            'cancelButtonText' => 'No',
+            'position' => 'center',
+            'toast' => false,
+            'timer' => null,
+            'onConfirmed' => 'removedItemInCart'
+        ]);
+
+        $this->rowCartId = $rowId;
+    }
+
+    public function removedItemInCart()
+    {
+        Cart::remove($this->rowCartId);
 
         $this->emit('cart_updated');
 

@@ -70,7 +70,7 @@
             </div>
             <div class="faq-item">
                 <h3 class="ourServices__item__subtitle">
-                    Q: How long is the turnaround time?
+                    Q: How long is the turnaround Days?
                 </h3>
                 <p class="ourServices__item__text">
                     A: It takes approximately {{ $max_turnaround_time ?: 3 }} day(s).

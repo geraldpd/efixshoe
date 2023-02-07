@@ -20,7 +20,7 @@
                     </p>
                     <div class="button__wrapper">
                         <a href="#" class="btn primary-btn">Explore Services</a>
-                        <a href="#" class="btn">Book A Service</a>
+                        <a href="#" class="btn">Avail A Service</a>
                     </div>
                 </div>
             </div>

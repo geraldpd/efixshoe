@@ -11,12 +11,12 @@ class Booking extends Model
 
     const PENDING = 'PENDING'; //initial
     const DECLINED = 'DECLINED';
-    const FOR_PICKUP = 'FOR PICKUP';
+    const FOR_PICKUP = 'APPROVED FOR PICKUP';
     const PROCESSING = 'PROCESSING'; //cleaning
     const AWAITING_PAYMENT = 'AWAITING PAYMENT';
     const FOR_DELIVERY = 'FOR DELIVERY';
     const FOR_CASH_ON_DELIVERY = 'CASH ON DELIVERY';
-    const COMPLETED = 'COMPLETED';
+    const COMPLETED = 'DELIVERED';
 
     protected $fillable = [
         'user_id',

@@ -49,12 +49,12 @@
                         <dl class="row">
 
                             <dd class="col-sm-6">
-                                @if(! in_array($booking->status, ['COMPLETED', 'DECLINED']))
+                                @if(! in_array($booking->status, ['DELIVERED', 'DECLINED']))
                                     <form method="POST" action="{{ route('admin.bookings.update', [$booking]) }}">
                                         @csrf
                                         @method('PUT')
 
-                                        <label for="">Select Progress</label>
+                                        <label for="">Status</label>
                                         <div class="input-group mb-3">
                                             <select class="form-select" id="status"  name="status">
                                                 <option value="" selected disabled> {{ Str::of($booking->status)->title()->replace('_', ' ') }} (current)</option>

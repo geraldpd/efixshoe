@@ -59,7 +59,7 @@
                         @guest
                             <li><a class="nav__link" href="{{ route('login') }}">Account</a></li>
                         @endguest
-                        <li><a href="#" class="btn primary-btn">Book A Service</a></li>
+                        <li><a href="#" class="btn primary-btn">Avail A Service</a></li>
                     </div>
                     </ul>
                 </nav>

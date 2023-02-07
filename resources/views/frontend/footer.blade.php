@@ -63,7 +63,7 @@
             <a href="{{ route('faqs') }}">FAQs</a>
         </li>
         <li>
-            <a href="{{ route('customer.booking') }}">Book A Service</a>
+            <a href="{{ route('customer.booking') }}">Avail A Service</a>
         </li>
         </ol>
     </div>
