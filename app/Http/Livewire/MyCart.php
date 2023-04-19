@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -81,6 +82,14 @@ class MyCart extends Component
         10 => '17'
     ];
 
+    public array $pickupDateMap = [];
+    public array $deliveryDateMap = [];
+
+    public array $pickupDateCtr = [];
+    public array $deliveryDateCtr = [];
+
+    public $maxBookingPerSlot = 5;
+
     public $rowCartId;
 
     protected $listeners = [
@@ -116,6 +125,30 @@ class MyCart extends Component
 
         $this->pickupDate = now()->addDay();
         $this->deliveryDate = Carbon::parse($this->pickupDate)->addDays($maxTurnaroundTime);
+
+        foreach($this->times as $key => $times){
+            $this->pickupDateMap[$key] = now()->addDay()->setTime($this->times[$key], 0, 0);
+            $this->deliveryDateMap[$key] = Carbon::parse($this->pickupDate)->addDays($maxTurnaroundTime)->setTime($this->times[$key], 0, 0);
+        }
+
+        $bookingPickupDate = Booking::select('pickup_date', DB::raw('count(*) as total'))->whereIn('pickup_date', $this->pickupDateMap)->groupBy('pickup_date')->get();
+        $bookingDeliveryDate = Booking::select('delivery_date', DB::raw('count(*) as total'))->whereIn('delivery_date', $this->deliveryDateMap)->groupBy('delivery_date')->get();
+
+        foreach($bookingPickupDate as $bookingPd){
+            $search = array_search($bookingPd->pickup_date, $this->pickupDateMap);
+
+            if( !empty($search) ){
+                $this->pickupDateCtr[$search] = $bookingPd->total;
+            }
+        }
+
+        foreach($bookingDeliveryDate as $bookingDd){
+            $search = array_search($bookingDd->delivery_date, $this->deliveryDateMap);
+
+            if( !empty($search) ){
+                $this->deliveryDateCtr[$search] = $bookingDd->total;
+            }
+        }
 
         return view('livewire.my-cart', compact('cartItems'));
     }

@@ -57,7 +57,11 @@
                             <select name="pickup_date" id="pickup_date" wire:model="selectedPickupSlot" required>
                                 <option value=''>--Choose a time slot--</option>
                                 @foreach($slots as $key => $slot)
-                                    <option value="{{ $key }}">{{ $slot }}</option>
+                                    @php
+                                        $check = (isset($pickupDateCtr[$key]) && $pickupDateCtr[$key] > $maxBookingPerSlot);
+                                    @endphp
+
+                                    <option value="{{ $key }}" {{ $check ? 'disabled' : '' }} title="{{ $check ? 'The time is already fully booked, choose another time slot.' : '' }}">{{ $slot }}</option>
                                 @endforeach
                             </select>
 
@@ -71,7 +75,11 @@
                             <select name="delivery_date" id="delivery_date" wire:model="selectedDeliverySlot" required>
                                 <option value=''>--Choose a time slot--</option>
                                 @foreach($slots as $key => $slot)
-                                    <option value="{{ $key }}">{{ $slot }}</option>
+                                    @php
+                                        $check = (isset($deliveryDateCtr[$key]) && $deliveryDateCtr[$key] > $maxBookingPerSlot);
+                                    @endphp
+
+                                    <option value="{{ $key }}" {{ $check ? 'disabled' : '' }} title="{{ $check ? 'The time is already fully booked, choose another time slot.' : '' }}">{{ $slot }}</option>
                                 @endforeach
                             </select>
 
