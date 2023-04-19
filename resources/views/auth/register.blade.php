@@ -76,7 +76,7 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
-                                    <label for="address">{{ __('Address') }}</label>
+                                    <label for="address">{{ __('House No. / Bldg / Street') }}</label>
                                     <textarea id="address" name="address" required autofocus>{{ old('address') }}</textarea>
 
                                     @error('address')
@@ -85,7 +85,69 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
-                                    <label for="password">{{ __('Password') }}</label>
+                                    <label for="brgy">{{ __('Barangay') }}</label>
+                                    <select name="brgy" id="brgy" required>
+                                        <option value="">--Select Barangay--</option>
+                                        <option value="Ayusan Norte">Ayusan Norte</option>
+                                        <option value="Ayusan Sur">Ayusan Sur</option>
+                                        <option value="Barangay I">Barangay I (Poblacion)</option>
+                                        <option value="Barangay II">Barangay II (Poblacion)</option>
+                                        <option value="Barangay III">Barangay III (Poblacion)</option>
+                                        <option value="Barangay IV">Barangay IV (Poblacion)</option>
+                                        <option value="Barangay V">Barangay V (Poblacion)</option>
+                                        <option value="Barangay VI">Barangay VI (Poblacion)</option>
+                                        <option value="Barangay VII">Barangay VII (Poblacion)</option>
+                                        <option value="Barangay VIII">Barangay VIII (Poblacion)</option>
+                                        <option value="Barangay IX">Barangay IX (Poblacion)</option>
+                                        <option value="Barraca">Barraca</option>
+                                        <option value="Beddeng Daya">Beddeng Daya</option>
+                                        <option value="Beddeng Laud">Beddeng Laud</option>
+                                        <option value="Bongtolan">Bongtolan</option>
+                                        <option value="Bulala">Bulala</option>
+                                        <option value="Cabalangegan">Cabalangegan</option>
+                                        <option value="Cabaroan Daya">Cabaroan Daya</option>
+                                        <option value="Cabaroan Laud">Cabaroan Laud</option>
+                                        <option value="Camangaan">Camangaan</option>
+                                        <option value="Capangpangan">Capangpangan</option>
+                                        <option value="Mindoro">Mindoro</option>
+                                        <option value="Nagsangalan">Nagsangalan</option>
+                                        <option value="Pantay Daya">Pantay Daya</option>
+                                        <option value="Pantay Fatima">Pantay Fatima</option>
+                                        <option value="Pantay Laud">Pantay Laud</option>
+                                        <option value="Paoa">Paoa</option>
+                                        <option value="Paratong">Paratong</option>
+                                        <option value="Pong-ol">Pong-ol</option>
+                                        <option value="Purok-a">Purok-a-bassit</option>
+                                        <option value="Purok-a">Purok-a-dackel</option>
+                                        <option value="Raois">Raois</option>
+                                        <option value="Rugsuanan">Rugsuanan</option>
+                                        <option value="Salindeg">Salindeg</option>
+                                        <option value="San Jose">San Jose</option>
+                                        <option value="San Julian">San Julian Norte</option>
+                                        <option value="San Julian">San Julian Sur</option>
+                                        <option value="San Pedro">San Pedro</option>
+                                        <option value="Tamag">Tamag</option>
+                                    </select>
+
+                                    @error('brgy')
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <div class="form__group form__group__full">
+                                    <label for="city">{{ __('City') }}</label>
+                                    <select name="city" id="city" required>
+                                        <option value="Vigan City">Vigan City</option>
+                                    </select>
+
+                                    @error('city')
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <div class="form__group form__group__full">
+                                    <label for="password">{{ __('Password') }}</label> &nbsp; &nbsp;
+                                    <i class="far fa-eye" id="togglePassword1" style="font-size: 14px; cursor: pointer;"></i>
                                     <input id="password" type="password" name="password" required autocomplete="current-password">
 
                                     @error('password')
@@ -94,7 +156,8 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
-                                    <label for="password-confirm">{{ __('Confirm Password') }}</label>
+                                    <label for="password-confirm">{{ __('Confirm Password') }}</label> &nbsp; &nbsp;
+                                    <i class="far fa-eye" id="togglePassword2" style="font-size: 14px; cursor: pointer;"></i>
                                     <input id="password-confirm" type="password" name="password_confirmation" required autocomplete="current-password">
                                 </div>
 
@@ -114,3 +177,45 @@
 </section>
 <!-- End Hero Section -->
 @endsection
+
+@push('custom-scripts')
+    <script>
+        const togglePassword1 = document.querySelector('#togglePassword1');
+        const togglePassword2 = document.querySelector('#togglePassword2');
+        const password = document.querySelector('#password');
+        const password_confirm = document.querySelector('#password-confirm');
+
+        togglePassword1.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+
+            if (this.classList.contains('fa-eye-slash')) {
+                this.classList.remove('fa-eye');
+            }
+
+            if (type == 'password' && !this.classList.contains('fa-eye')) {
+                this.classList.add('fa-eye');
+            }
+        });
+
+        togglePassword2.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password_confirm.getAttribute('type') === 'password' ? 'text' : 'password';
+            password_confirm.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+
+            if (this.classList.contains('fa-eye-slash')) {
+                this.classList.remove('fa-eye');
+            }
+
+            if (type == 'password' && !this.classList.contains('fa-eye')) {
+                this.classList.add('fa-eye');
+            }
+        });
+    </script>
+@endpush

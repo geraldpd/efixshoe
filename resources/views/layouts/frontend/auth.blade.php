@@ -23,6 +23,10 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/about.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    @stack('custom-styles')
 </head>
 <body>
     <div class="nav">
@@ -73,5 +77,7 @@
 
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script src="{{ asset('js/main.js') }}"></script>
+
+        @stack('custom-scripts')
     </body>
 </html>

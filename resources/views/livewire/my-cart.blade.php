@@ -33,10 +33,6 @@
             </div>
 
             @if( Cart::count() > 0 )
-                <h2 class="page__subtitle__text" style="text-align: right;">
-                    Total: PHP {{ $priceTotal }}
-                </h2>
-                <br>
                 @if( $discount != 0 )
                     <h2 class="page__subtitle" style="text-align: right;">
                         Sub Total: PHP {{ $subTotal }}
@@ -46,6 +42,10 @@
                         Discount: PHP {{ $discount }}
                     </h5>
                 @endif
+                <br>
+                <h2 class="page__subtitle__text" style="text-align: right;">
+                    Total: PHP {{ $priceTotal }}
+                </h2>
                 
                 <br>
 
