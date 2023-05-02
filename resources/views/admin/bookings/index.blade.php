@@ -1,51 +1,57 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Bookings')
+
+@section('content_header')
+    <h1>Bookings</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-        <h1>Bookings</h1>
+@php
+    $heads = [
+        '#',
+        'Status',
+        'Customer',
+        'Pickup Date',
+        'Delivery Date',
+        'Total Pairs',
+        'Total Cost',
+        'Action'
+    ];
 
-        <div class="col-md-12">
+    // $btnDetails = "<a href='{{ route('admin.bookings.show', [$booking]) }}'>Details</a>";
 
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Pickup Date</th>
-                        <th scope="col">Delivery Date</th>
-                        <th scope="col">Total Pairs</th>
-                        <th scope="col">Total Cost</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($bookings as $booking)
-                        <tr>
-                            <td>{{ $booking->id }}</td>
-                            <td>{{ Str::of($booking->status)->upper()->replace('_', ' ') }}</td>
-                            <td>{{ $booking->customer->email }}</td>
-                            <td>{{ $booking->pickup_date->format('F d Y g:i A') }}</td>
-                            <td>{{ $booking->delivery_date->format('F d Y g:i A') }}</td>
-                            <td class="text-center">{{ $booking->total_pairs_of_shoes }}</td>
-                            <td>PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) }}</td>
-                            <td>
-                                <a href="{{ route('admin.bookings.show', [$booking]) }}">Details</a>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="6">No Bookings</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
+    $d = [];
+    foreach ($bookings as $booking) {
+        $d[] = [
+            $booking->id,
+            Str::of($booking->status)->upper()->replace('_', ' '),
+            $booking->customer->email,
+            $booking->pickup_date->format('F d Y g:i A'),
+            $booking->delivery_date->format('F d Y g:i A'),
+            $booking->total_pairs_of_shoes,
+            'PHP ' . number_format($booking->paymentDetail->total_cost / 100, 2),
+            "<a href='/admin/bookings/$booking->id'>Details</a>"
+        ];
+    }
 
-            {{ $bookings->links() }}
+    $config = [
+        'data' => $d,
+        'order' => [[0, 'desc']],
+        'columns' => [
+            null, 
+            ['orderable' => false],
+            ['orderable' => false],
+            null,
+            null,
+            null,
+            ['orderable' => false],
+            ['orderable' => false]
+        ],
+    ];
+@endphp
 
-        </div>
-    </div>
-</div>
+<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered compressed/>
+
 @endsection

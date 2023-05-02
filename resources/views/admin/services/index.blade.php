@@ -1,58 +1,55 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Services')
+
+@section('content_header')
+    <h1>Services</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-        <h1>Services</h1>
+@php
+    $heads = [
+        '#',
+        'Name',
+        'Description',
+        'Turnaround Days',
+        'Cost',
+        'Active',
+        'Action'
+    ];
 
-        @if(session()->has('message'))
-            <div class="alert alert-info">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+    $d = [];
+    foreach ($services as $service) {
+        $d[] = [
+            $service->id,
+            $service->name,
+            $service->description,
+            $service->turnaround_time,
+            $service->cost,
+            $service->is_active ? 'Yes' : 'No',
+            "<a href='services/$service->id/edit'>Edit</a>"
+        ];
+    }
 
-        <div class="col-md-12">
+    $config = [
+        'data' => $d,
+        'order' => [[0, 'desc']],
+        'columns' => [
+            null, 
+            ['orderable' => false],
+            null,
+            null,
+            null,
+            ['orderable' => false],
+            ['orderable' => false]
+        ],
+    ];
+@endphp
 
-            <a href="{{ route('admin.services.create') }}" role="button" class="btn btn-primary float-right">Create</a>
+<a href="{{ route('admin.services.create') }}" role="button" class="btn btn-primary float-left">Create</a>
+<br><br><br>
 
-            <br>
-            <br>
+<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered compressed/>
 
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Turnaround Days</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($services as $service)
-                        <tr>
-                            <td>{{ $service->id }}</td>
-                            <td>{{ $service->name }}</td>
-                            <td>{{ $service->description }}</td>
-                            <td class="text-center">{{ $service->turnaround_time }}</td>
-                            <td class="text-right">{{ $service->cost }}</td>
-                            <td>{{ $service->is_active ? 'Yes' : 'No' }}</td>
-                            <td><a href="{{ route('admin.services.edit', [$service->id]) }}">Edit</a></td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="6">No Services</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-
-            {{ $services->links() }}
-
-        </div>
-    </div>
-</div>
 @endsection

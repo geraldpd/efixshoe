@@ -1,18 +1,16 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Services')
+
+@section('content_header')
+    <h1>Services</h1>
+@stop
 
 @section('content')
 
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.services.index') }}">Services</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{ route('admin.services.show', [$service]) }}">{{ $service->name }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
-                </ol>
-            </nav>
             <form method="POST" action="{{ route('admin.services.update', [$service]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

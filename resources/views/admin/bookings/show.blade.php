@@ -1,17 +1,15 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Bookings')
+
+@section('content_header')
+    <h1>Bookings</h1>
+@stop
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('admin.bookings.index') }}">Bookings</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ $booking->id }}</li>
-                    </ol>
-                </nav>
-
                 @if(session()->has('message'))
                     <div class="alert alert-info">
                         {{ session()->get('message') }}
