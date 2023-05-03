@@ -47,6 +47,12 @@
     ];
 @endphp
 
+@if(session()->has('message'))
+    <div class="alert alert-info">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
 <a href="{{ route('admin.services.create') }}" role="button" class="btn btn-primary float-left">Create</a>
 <br><br><br>
 

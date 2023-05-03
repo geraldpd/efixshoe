@@ -56,7 +56,7 @@ class ServiceController extends Controller
             $service->save();
         }
 
-        return redirect()->route('admin.services.show', [$service])->with('message', 'Service Successfully Created');
+        return redirect()->route('admin.services.index')->with('message', 'Service Successfully Created');
     }
 
     /**

@@ -1,56 +1,58 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Vouchers')
+
+@section('content_header')
+    <h1>Vouchers</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-        @if(session()->has('message'))
-            <div class="alert alert-info">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+@php
+    $heads = [
+        '#',
+        'Code',
+        'Percent Amount',
+        'Quantity',
+        'Remaining',
+        'Expiry Date'
+    ];
 
-        <h1>Vouchers</h1>
+    $d = [];
+    foreach ($vouchers as $voucher) {
+        $d[] = [
+            $voucher->id,
+            $voucher->code,
+            $voucher->amount . '%',
+            $voucher->quantity,
+            $voucher->remaining,
+            $voucher->expiry_date ? $voucher->expiry_date->format('Y-m-d') : 'None'
+        ];
+    }
 
-        <div class="col-md-12">
+    $config = [
+        'data' => $d,
+        'order' => [[0, 'desc']],
+        'columns' => [
+            null, 
+            null,
+            null,
+            null,
+            null,
+            null,
+        ],
+    ];
+@endphp
 
-            <a href="{{ route('admin.vouchers.create') }}" role="button" class="btn btn-primary float-right">Create</a>
-
-            <br>
-            <br>
-
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Code</th>
-                        <th scope="col">Percent Amount</th></th>
-                        <th scope="col">Quantity</th></th>
-                        <th scope="col">Remaining</th></th>
-                        <th scope="col">Expiry Date</th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($vouchers as $voucher)
-                        <tr>
-                            <td>{{ $voucher->id }}</td>
-                            <td>{{ $voucher->code }}</td>
-                            <td>{{ $voucher->amount }}%</td>
-                            <td>{{ $voucher->quantity }}</td>
-                            <td>{{ $voucher->remaining }}</td>
-                            <td>{{ $voucher->expiry_date ? $voucher->expiry_date->format('Y-m-d') : 'None'}}</td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="7">No Voucher</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-
-            {{ $vouchers->links() }}
-
-        </div>
+@if(session()->has('message'))
+    <div class="alert alert-info">
+        {{ session()->get('message') }}
     </div>
-</div>
+@endif
+
+<a href="{{ route('admin.vouchers.create') }}" role="button" class="btn btn-primary float-left">Create</a>
+<br><br><br>
+
+<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered compressed/>
+
 @endsection

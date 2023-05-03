@@ -57,7 +57,7 @@ class PaymentMethodController extends Controller
             $payment_method->save();
         }
 
-        return redirect()->route('admin.payment_methods.show', [$payment_method])->with('message', 'Payment Method Successfully Created');
+        return redirect()->route('admin.payment_methods.index')->with('message', 'Payment Method Successfully Created');
     }
 
     /**

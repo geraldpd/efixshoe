@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Booking;
+use App\Models\PaymentMethod;
+use App\Models\Service;
+use App\Models\Voucher;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        $bookings = Booking::whereDate('created_at', Carbon::today())->count();
+        $services = Service::count();
+        $pmethods = PaymentMethod::count();
+        $vouchers = Voucher::count();
+
+        return view('admin.home', compact('bookings', 'services', 'pmethods', 'vouchers'));
     }
 }

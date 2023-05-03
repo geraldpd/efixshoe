@@ -1,56 +1,58 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Payment Methods')
+
+@section('content_header')
+    <h1>Payment Methods</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
 
-        <h1>Payment Methods</h1>
+@php
+    $heads = [
+        '#',
+        'Name',
+        'Account Name',
+        'Account Number',
+        'Active',
+        'Action'
+    ];
 
-        @if(session()->has('message'))
-            <div class="alert alert-info">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+    $d = [];
+    foreach ($payment_methods as $payment_method) {
+        $d[] = [
+            $payment_method->id,
+            $payment_method->name,
+            $payment_method->account_name,
+            $payment_method->account_number,
+            $payment_method->is_active ? 'Yes' : 'No',
+            "<a href='/admin/payment_methods/$payment_method->id/edit'>Edit</a>"
+        ];
+    }
 
-        <div class="col-md-12">
+    $config = [
+        'data' => $d,
+        'order' => [[0, 'desc']],
+        'columns' => [
+            null, 
+            null, 
+            null, 
+            null, 
+            ['orderable' => false],
+            ['orderable' => false]
+        ],
+    ];
+@endphp
 
-            <a href="{{ route('admin.payment_methods.create') }}" role="button" class="btn btn-primary float-right">Create</a>
-
-            <br>
-            <br>
-
-            <table class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Account Name</th>
-                        <th scope="col">Account Number</th>
-                        <th scope="col">Active</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($payment_methods as $payment_method)
-                        <tr>
-                            <td>{{ $payment_method->id }}</td>
-                            <td>{{ $payment_method->name }}</td>
-                            <td>{{ $payment_method->account_name }}</td>
-                            <td>{{ $payment_method->account_number }}</td>
-                            <td>{{ $payment_method->is_active ? 'Yes' : 'No' }}</td>
-                            <td><a href="{{ route('admin.payment_methods.edit', [$payment_method->id]) }}">Edit</a></td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td class="text-center" colspan="6">No Payment Methods</td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-
-            {{ $payment_methods->links() }}
-
-        </div>
+@if(session()->has('message'))
+    <div class="alert alert-info">
+        {{ session()->get('message') }}
     </div>
-</div>
+@endif
+
+<a href="{{ route('admin.payment_methods.create') }}" role="button" class="btn btn-primary float-left">Create</a>
+<br><br><br>
+
+<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered compressed/>
+
 @endsection
