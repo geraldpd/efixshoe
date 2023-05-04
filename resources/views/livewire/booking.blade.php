@@ -32,7 +32,7 @@
                                 <br><br>
                                 <form wire:submit.prevent="addToMyCart({{ $service->id }})" method="POST" action="{{ route('customer.cart.store') }}">
                                     <div class="form__group">
-                                        <label for="pairs_of_shoes">Pairs of shoes</label>
+                                        <label for="pairs_of_shoes">Pair/s of shoes</label>
                                         <input style="background-color: var(--lightGreen-2) !important;" wire:model="quantity.{{ $service->id }}" id="pairs_of_shoes" type="number" name="pairs_of_shoes" value="{{ old('pairs_of_shoes') }}" min="1" required autocomplete="pairs_of_shoes" autofocus>
                 
                                         @error('pairs_of_shoes')

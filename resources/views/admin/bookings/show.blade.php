@@ -84,9 +84,16 @@
                                 <br>
                             </dt>
 
+                            @if ($booking->paymentDetail->voucher_code)
+                                <dt class="col-sm-3">Sub Total:</dt>
+                                <dd class="col-sm-9"><h5>PHP {{ number_format(($booking->paymentDetail->total_cost + $booking->paymentDetail->discount) / 100, 2) }}</h5></dd>
+
+                                <dt class="col-sm-3">Discount:</dt>
+                                <dd class="col-sm-9"><h5>PHP {{ number_format($booking->paymentDetail->discount / 100, 2) }}</h5></dd>
+                            @endif
+
                             <dt class="col-sm-3">Total Cost:</dt>
                             <dd class="col-sm-9"><h4>PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) }}</h4></dd>
-
 
                             <dt class="col-sm-3">Payment Mode:</dt>
                             <dd class="col-sm-9">{{ $booking->paymentDetail->paymentMethod->name }}</dd>
@@ -124,7 +131,11 @@
                                         <hr class="booking_item_divider" />
 
                                         <dt class="col-sm-8">Total</dt>
-                                        <dd class="col-sm-4 text-right"><strong>PHP {{ number_format($bookingItem->services->sum('cost'), 2) }}</strong></dd>
+                                        @if ($booking->paymentDetail->voucher_code)
+                                            <dd class="col-sm-4 text-right"><strong>PHP {{ number_format(($booking->paymentDetail->total_cost + $booking->paymentDetail->discount) / 100, 2) }}</strong></dd>
+                                        @else
+                                            <dd class="col-sm-4 text-right"><strong>PHP {{ number_format($booking->paymentDetail->total_cost / 100, 2) }}</strong></dd>
+                                        @endif
 
                                     </dl>
 

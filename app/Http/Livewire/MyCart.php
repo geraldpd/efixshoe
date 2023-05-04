@@ -206,11 +206,11 @@ class MyCart extends Component
             return;
         }
 
-        $userBookingsWithGivenVoucher = request()->user()->bookings()->whereHas('paymentDetail', function($query) {
-            $query->where('voucher_code', $this->voucher);
-        })->count();
+        // $userBookingsWithGivenVoucher = request()->user()->bookings()->whereHas('paymentDetail', function($query) {
+        //     $query->where('voucher_code', $this->voucher);
+        // })->count();
 
-        if( $voucher->is_used || $voucher->remaining == 0 || $userBookingsWithGivenVoucher >= 1 ){
+        if( $voucher->is_used || $voucher->remaining == 0 ){
             $this->alert('warning', 'Voucher has already been used.', [
                 'position' => 'center',
                 'toast' => false,
