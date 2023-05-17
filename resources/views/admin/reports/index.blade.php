@@ -1,30 +1,37 @@
-@extends('layouts.admin.main')
+@extends('adminlte::page')
+
+@section('title', 'Reports')
+
+@section('content_header')
+    <h1>Reports</h1>
+@stop
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
 
-            @if(session()->has('message'))
-                <div class="alert alert-info">
-                    {{ session()->get('message') }}
-                </div>
-            @endif
+@if(session()->has('message'))
+    <div class="alert alert-info">
+        {{ session()->get('message') }}
+    </div>
+@endif
 
-            <h1>Reports</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Generate Reports</small></h3>
+            </div>
+            <form method="POST" action="{{ route('admin.reports.generate') }}">
+                @csrf
 
-            <div class="col-md-6 col-md-span-3">
+                @if($errors->any())
+                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                @endif
 
-                <form method="POST" action="{{ route('admin.reports.generate') }}">
-                    @csrf
-
-                    @if($errors->any())
-                        {!! implode('', $errors->all('<div>:message</div>')) !!}
-                    @endif
-
+                <div class="card-body">
                     <div class="row">
-                        <div class="form-group col-md-12 p-2">
-                            <label for="count">Reports:</label>
-                            <select name="report" id="report" class="form-select">
+                        <div class="form-group col-md-6">
+                            <label for="count">Reports</label>
+                            <select name="report" id="report" class="form-control form-select">
                                 @foreach ($reports as $report => $name)
                                     <option value="{{ $report }}"> {{ $name }}</option>
                                 @endforeach
@@ -37,64 +44,57 @@
                             @endif
                         </div>
 
-                        <div class="bookings-filter row">
-                            <br>
-                            <div class="form-group col-md-12 p-2">
-                                <label for="count">Status:</label>
-                                <select name="status" id="status" class="form-select">
-                                    <option value="ALL">All</option>
-                                    @foreach ($grouped_statuses as $group => $statuses)
-                                        <optgroup label="{{ $group }}">
-                                            @foreach ($statuses as $status)
-                                                <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
-                                            @endforeach
-                                        </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label for="count">Status</label>
+                            <select name="status" id="status" class="form-control form-select">
+                                <option value="ALL">All</option>
+                                @foreach ($grouped_statuses as $group => $statuses)
+                                    <optgroup label="{{ $group }}">
+                                        @foreach ($statuses as $status)
+                                            <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </select>
+                        </div>
 
-                            <br>
+                        <div class="form-group col-md-12">
+                            <label for="date_range">Date Range</label>
 
-                            <div class="form-group col-md-12 p-2">
-                                <label for="date_range">Date Range</label>
+                            <select name="date_range" id="date_range" class="form-control form-select">
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="range">This Month</option>
+                                <option value="year">This Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
 
-                                <select name="date_range" id="date_range" class="form-select">
-                                    <option value="today">Today</option>
-                                    <option value="week">This Week</option>
-                                    <option value="range">This Month</option>
-                                    <option value="year">This Year</option>
-                                    <option value="custom">Custom Range</option>
-                                </select>
+                        </div>
 
-                            </div>
+                        <div class="form-group col-md-6" id="custom_date_range_from_div">
+                            <label for="date_range">From</label>
+                            <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
+                        </div>
 
-                            <br>
-
-                            <div class="form-group col-md-6 p-2" id="custom_date_range_from_div">
-                                <label for="date_range">From</label>
-                                <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
-                            </div>
-
-                            <div class="form-group col-md-6 p-2" id="custom_date_range_to_div">
-                                <label for="date_range">To</label>
-                                <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
-                            </div>
+                        <div class="form-group col-md-6" id="custom_date_range_to_div">
+                            <label for="date_range">To</label>
+                            <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
                         </div>
 
                     </div>
-
-                    <br>
+                    
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary float-right">
                             {{ __('Generate') }}
                         </button>
                     </div>
-                </form>
 
-            </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
 
 @push('styles')

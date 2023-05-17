@@ -19,6 +19,8 @@
             <div class="col-md-12">
 
                 <div class="d-print-block d-none">
+                    <img src="{{ asset('images/logo.png') }}" alt="eFixShoe Logo" style="position: absolute; float: right; right: 0; width: 10%;">
+                    <br>
                     <h1>Customer Report</h1>
                     <span class="col-sm-8">Print Date: {{ now() }}</span>
                 </div>
