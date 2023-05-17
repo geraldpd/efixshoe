@@ -1,28 +1,31 @@
-@extends('layouts.app')
+@extends('layouts.frontend.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
-
+<section id="ourServices" data-aos="fade-up">
+    <div class="container">
+        <div class="ourServices__wrapper">
+            <div class="faq-item">
+                <h3 class="ourServices__item__subtitle">
+                    Verify Your Email Address
+                </h3>
+                <p class="ourServices__item__text">
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
+                    <br><br>
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="btn primary-btn">{{ __('Click here to request another') }}</button>.
                     </form>
-                </div>
+                </p>
+                @if (session('resent'))
+                    <br><br>
+                    <h5 class="subtitle-success">
+                        {{ __('A fresh verification link has been sent to your email address.') }}
+                    </h5>
+                @endif
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

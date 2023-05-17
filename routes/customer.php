@@ -16,7 +16,7 @@ use App\Http\Controllers\Customer\Controller;
 */
 
 Route::group([
-    'middleware' => ['customer'],
+    'middleware' => ['customer', 'verified'],
 ], function(){
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/booking', [Controller::class, 'index'])->name('booking');
