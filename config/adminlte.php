@@ -331,12 +331,7 @@ return [
             'text' => 'Reports',
             'url'  => 'admin/reports',
             'icon' => 'fas fa-fw fa-list-alt',
-        ],
-        [
-            'text' => 'Reports',
-            'url'  => 'admin/logout',
-            'icon' => 'fas fa-fw fa-list-alt',
-        ],
+        ]
     ],
 
     /*
