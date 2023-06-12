@@ -32,7 +32,7 @@
             $booking->delivery_date->format('F d Y g:i A'),
             $booking->total_pairs_of_shoes,
             'PHP ' . number_format($booking->paymentDetail->total_cost / 100, 2),
-            "<a href='/admin/bookings/$booking->id'>Details</a>"
+            "<a href='/admin/bookings/$booking->id' title='View Details'><i class='fa fa-eye'></i></a>"
         ];
     }
 

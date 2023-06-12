@@ -28,7 +28,7 @@
             $service->turnaround_time,
             $service->cost,
             $service->is_active ? 'Yes' : 'No',
-            "<a href='services/$service->id/edit'>Edit</a>"
+            "<a href='services/$service->id/edit' title='Edit Service'><i class='fa fa-edit'></i></a>"
         ];
     }
 

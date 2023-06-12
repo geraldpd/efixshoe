@@ -18,6 +18,13 @@
                 @if(!config('adminlte.sidebar_nav_accordion'))
                     data-accordion="false"
                 @endif>
+
+                @if(Auth::user())
+                    <li class="nav-item">
+                        Hi, {{ Auth::user()->first_name }}!
+                    </li>
+                @endif
+
                 {{-- Configured sidebar links --}}
                 @each('adminlte::partials.sidebar.menu-item', $adminlte->menu('sidebar'), 'item')
                 

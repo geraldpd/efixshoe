@@ -26,7 +26,7 @@
             $payment_method->account_name,
             $payment_method->account_number,
             $payment_method->is_active ? 'Yes' : 'No',
-            "<a href='/admin/payment_methods/$payment_method->id/edit'>Edit</a>"
+            "<a href='/admin/payment_methods/$payment_method->id/edit' title='Edit Payment Method'><i class='fa fa-edit'></i></a>"
         ];
     }
 
