@@ -163,18 +163,25 @@
     </style>
 @endpush
 
-@push('scripts')
+@section('js')
     <script>
-        document.getElementById('decline_reason').value = '';
+        var reason_fld = document.getElementById('decline_reason');
+        var status_fld = document.getElementById('status');
 
-        document.getElementById('status').addEventListener('change', function() {
-            if( this.value == 'DECLINED' ){
-                document.getElementById('div_decline_reason').style.display = 'block';
-            }
-            else{
-                document.getElementById('div_decline_reason').style.display = 'none';
-                document.getElementById('decline_reason').value = '';
-            }
-        });
+        if(reason_fld){
+            reason_fld.value = '';
+        }
+
+        if(status_fld){
+            document.getElementById('status').addEventListener('change', function() {
+                if( this.value == 'DECLINED' ){
+                    document.getElementById('div_decline_reason').style.display = 'block';
+                }
+                else{
+                    document.getElementById('div_decline_reason').style.display = 'none';
+                    reason_fld.value = '';
+                }
+            });
+        }
     </script>
-@endpush
+@stop
