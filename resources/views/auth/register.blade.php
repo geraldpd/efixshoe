@@ -85,6 +85,17 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
+                                    <label for="city">{{ __('City') }}</label>
+                                    <select name="city" id="city" required>
+                                        <option value="Vigan City">Vigan City</option>
+                                    </select>
+
+                                    @error('city')
+                                        <p class="error-message"><strong>{{ $message }}</strong></p>
+                                    @enderror
+                                </div>
+
+                                <div class="form__group form__group__full">
                                     <label for="brgy">{{ __('Barangay') }}</label>
                                     <select name="brgy" id="brgy" required>
                                         <option value="">--Select Barangay--</option>
@@ -135,20 +146,10 @@
                                 </div>
 
                                 <div class="form__group form__group__full">
-                                    <label for="city">{{ __('City') }}</label>
-                                    <select name="city" id="city" required>
-                                        <option value="Vigan City">Vigan City</option>
-                                    </select>
-
-                                    @error('city')
-                                        <p class="error-message"><strong>{{ $message }}</strong></p>
-                                    @enderror
-                                </div>
-
-                                <div class="form__group form__group__full">
                                     <label for="password">{{ __('Password') }}</label> &nbsp; &nbsp;
                                     <i class="far fa-eye" id="togglePassword1" style="font-size: 14px; cursor: pointer;"></i>
                                     <input id="password" type="password" name="password" required autocomplete="current-password">
+                                    <p>Note: Must be at least 8 characters and contain at least 1 uppercase character, 1 number, and 1 special character.</p>
 
                                     @error('password')
                                         <p class="error-message"><strong>{{ $message }}</strong></p>

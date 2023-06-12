@@ -22,6 +22,7 @@
 
                         <a href="#" class="btn" wire:click="removeItemInCart('{{ $item->rowId }}')">Remove Item</a>
                     </div>
+                    <p class="ourServices__item__text">Note: Check the quantity of the chosen service. If mistaken, just remove the item and go back adding items correctly.</p>
                 @empty
                     <div class="ourServices__item">
                         <div class="ourServices__item__info">
@@ -34,13 +35,13 @@
 
             @if( Cart::count() > 0 )
                 @if( $discount != 0 )
-                    <h2 class="page__subtitle" style="text-align: right;">
-                        Sub Total: PHP {{ $subTotal }}
-                    </h2>
-                    <br>
-                    <h5 class="page__subtitle" style="text-align: right;">
+                    <h5 class="page__subtitle" style="text-align: right; font-size: 16px; color: #00b53d;">
                         Discount: PHP {{ $discount }}
                     </h5>
+                    <br>
+                    <h2 class="page__subtitle" style="text-align: right; color: #00b53d;">
+                        Sub Total: PHP {{ $subTotal }}
+                    </h2>
                 @endif
                 <br>
                 <h2 class="page__subtitle__text" style="text-align: right;">
