@@ -53,6 +53,6 @@
 <a href="{{ route('admin.payment_methods.create') }}" role="button" class="btn btn-primary float-left">Create</a>
 <br><br><br>
 
-<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered compressed/>
+<x-adminlte-datatable id="table2" :heads="$heads" head-theme="dark" :config="$config" striped hoverable bordered beautify/>
 
 @endsection

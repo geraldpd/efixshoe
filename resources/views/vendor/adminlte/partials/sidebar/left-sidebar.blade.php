@@ -21,7 +21,10 @@
 
                 @if(Auth::user())
                     <li class="nav-item">
-                        Hi, {{ Auth::user()->first_name }}!
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user"></i>
+                            Hi, {{ Auth::user()->first_name }}!
+                        </a>
                     </li>
                 @endif
 
