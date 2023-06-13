@@ -5,6 +5,18 @@
 @section('adminlte_css')
     @stack('css')
     @yield('css')
+
+    <style>
+        .global_bg {
+            background-color: #f5fcf4;
+            color: #000 !important;
+        }
+
+        .global_bg1 {
+            background-color: #d6e5d8;
+            color: #000 !important;
+        }
+    </style>
 @stop
 
 @section('classes_body', $layoutHelper->makeBodyClasses())
