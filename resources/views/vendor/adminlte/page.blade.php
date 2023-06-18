@@ -66,4 +66,22 @@
 @section('adminlte_js')
     @stack('js')
     @yield('js')
+    <script>
+        $(document).ready(function(){
+            var form = $("#form");
+
+            $(document).on('submit', '#form', function (e) {
+                if($("#form")[0].reportValidity()) {
+                    Swal.fire({
+                        title: 'Success!', 
+                        text: 'Saved successfully', 
+                        type: 'success',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
+                    });
+                }
+            });
+        });
+    </script>
 @stop

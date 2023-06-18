@@ -15,7 +15,7 @@
                 <h3 class="card-title">Create New Payment Method</small></h3>
             </div>
 
-            <form method="POST" action="{{ route('admin.payment_methods.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.payment_methods.store') }}" enctype="multipart/form-data" id="form">
                 @csrf
 
                 <div class="card-body">

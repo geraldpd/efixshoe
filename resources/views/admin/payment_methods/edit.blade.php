@@ -15,7 +15,7 @@
                 <h3 class="card-title">Edit Payment Method</small></h3>
             </div>
 
-            <form method="POST" action="{{ route('admin.payment_methods.update', [$payment_method]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.payment_methods.update', [$payment_method]) }}" enctype="multipart/form-data" id="form">
                 @csrf
                 @method('PUT')
 

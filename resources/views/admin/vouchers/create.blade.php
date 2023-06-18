@@ -15,7 +15,7 @@
                 <h3 class="card-title">Create New Voucher</small></h3>
             </div>
 
-            <form method="POST" action="{{ route('admin.vouchers.store') }}">
+            <form method="POST" action="{{ route('admin.vouchers.store') }}" id="form">
                 @csrf
 
                 <div class="card-body">

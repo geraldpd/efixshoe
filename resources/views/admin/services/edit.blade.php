@@ -15,7 +15,7 @@
                 <h3 class="card-title">Edit Service</small></h3>
             </div>
 
-            <form method="POST" action="{{ route('admin.services.update', [$service]) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.services.update', [$service]) }}" enctype="multipart/form-data" id="form">
                 @csrf
                 @method('PUT')
 

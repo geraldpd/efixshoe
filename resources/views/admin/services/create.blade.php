@@ -14,7 +14,7 @@
             <div class="card-header">
                 <h3 class="card-title">Create New Service</small></h3>
             </div>
-            <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('admin.services.store') }}" enctype="multipart/form-data" id="form">
                 @csrf
 
                 <div class="card-body">
