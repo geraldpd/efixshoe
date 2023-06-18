@@ -76,7 +76,7 @@
 	background-color: var(--lightGreen-1);
 	padding: 1.5rem;
 	border-radius: 12px;
-    max-height: 400px;
+	max-height: 300px;
 }
 .faq-item {
 	background-color: var(--lightGreen-1);
@@ -127,6 +127,12 @@
 	font-size: 1.4rem;
 	color: var(--black-2);
 	font-weight: 500;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 6;
+	line-clamp: 6;
+	max-height: 300px;
 }
 @media only screen and (min-width: 768px) {
 	.ourServices__title {
