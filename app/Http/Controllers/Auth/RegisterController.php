@@ -59,6 +59,9 @@ class RegisterController extends Controller
             'city' => ['required'],
             'address' => ['required', 'max:1000'],
             'password' => ['required', 'string', 'min:8', 'confirmed', new IsValidPassword()],
+        ], [
+            'first_name.regex' => 'Invalid format. Characters only.',
+            'last_name.regex' => 'Invalid format. Characters only.'
         ]);
     }
 
