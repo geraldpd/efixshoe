@@ -33,8 +33,8 @@ class GenerateRequest extends FormRequest
             'report' => ['required'],
             'status' => [Rule::in($statusses)],
             'date_range' => ['required'],
-            'custom_date_range_from' => 'required_if:date_range,custom',
-            'custom_date_range_to' => 'required_if:date_range,custom'
+            'custom_date_range_from' => ['required_if:report,bookings', 'required_if:date_range,custom'],
+            'custom_date_range_to' => ['required_if:report,bookings', 'required_if:date_range,custom']
         ];
     }
 }
