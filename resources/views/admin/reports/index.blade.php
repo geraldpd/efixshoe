@@ -44,43 +44,44 @@
                             @endif
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="count">Status</label>
-                            <select name="status" id="status" class="form-control form-select">
-                                <option value="ALL">All</option>
-                                @foreach ($grouped_statuses as $group => $statuses)
-                                    <optgroup label="{{ $group }}">
-                                        @foreach ($statuses as $status)
-                                            <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
+                        <div class="bookings-filter row">
+                            <div class="form-group col-md-6">
+                                <label for="count">Status</label>
+                                <select name="status" id="status" class="form-control form-select">
+                                    <option value="ALL">All</option>
+                                    @foreach ($grouped_statuses as $group => $statuses)
+                                        <optgroup label="{{ $group }}">
+                                            @foreach ($statuses as $status)
+                                                <option value="{{ $status }}">{{ Str::of($status)->title()->replace('_', ' ') }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="date_range">Date Range</label>
+
+                                <select name="date_range" id="date_range" class="form-control form-select">
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="range">This Month</option>
+                                    <option value="year">This Year</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group col-md-6" id="custom_date_range_from_div">
+                                <label for="date_range">From</label>
+                                <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
+                            </div>
+
+                            <div class="form-group col-md-6" id="custom_date_range_to_div">
+                                <label for="date_range">To</label>
+                                <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
+                            </div>
                         </div>
-
-                        <div class="form-group col-md-12">
-                            <label for="date_range">Date Range</label>
-
-                            <select name="date_range" id="date_range" class="form-control form-select">
-                                <option value="today">Today</option>
-                                <option value="week">This Week</option>
-                                <option value="range">This Month</option>
-                                <option value="year">This Year</option>
-                                <option value="custom">Custom Range</option>
-                            </select>
-
-                        </div>
-
-                        <div class="form-group col-md-6" id="custom_date_range_from_div">
-                            <label for="date_range">From</label>
-                            <input type="date" class="form-control" name="custom_date_range_from" id="custom_date_range_from" max="{{ date('Y-m-d') }}">
-                        </div>
-
-                        <div class="form-group col-md-6" id="custom_date_range_to_div">
-                            <label for="date_range">To</label>
-                            <input type="date" class="form-control" name="custom_date_range_to" id="custom_date_range_to" max="{{ date('Y-m-d') }}" disabled>
-                        </div>
-
                     </div>
                     
 
@@ -97,7 +98,7 @@
 </div>
 @endsection
 
-@push('styles')
+@section('css')
     <style>
         #custom_date_range_from_div {
             display:none;
@@ -106,16 +107,16 @@
             display:none;
         }
     </style>
-@endpush
+@stop
 
-@push('scripts')
+@section('js')
     <script>
         let custom_from = document.getElementById('custom_date_range_from');
         let custom_to = document.getElementById('custom_date_range_to');
 
         document.getElementById('report').addEventListener('change', function() {
             if(this.value == 'bookings') {
-                document.getElementsByClassName('bookings-filter')[0].style.display = 'block';
+                document.getElementsByClassName('bookings-filter')[0].style.display = 'flex';
             } else {
                 document.getElementsByClassName('bookings-filter')[0].style.display = 'none';
             }
@@ -146,4 +147,4 @@
             custom_to.focus()
         });
     </script>
-@endpush
+@stop
