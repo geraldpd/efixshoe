@@ -90,6 +90,39 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-success">
+                    <div class="card-header">
+                        <h3 class="card-title">Services Booked Last 30 Days</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart">
+                            <canvas id="servicesLast30Days" height="100px"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="info-box mb-3 bg-info">
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Most Used Voucher Last 30 Days</span>
+                        <span class="info-box-number">Code: {{ $mostUsedVoucher->voucher_code ?: 'None' }} | Usage: {{ $mostUsedVoucher->count ?: 0 }}</span>
+                    </div>
+                </div>
+
+                <div class="info-box mb-3 bg-warning">
+                    <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Least Used Voucher Last 30 Days</span>
+                        <span class="info-box-number">Code: {{ $leastUsedVoucher->voucher_code ?: 'None' }} | Usage: {{ $leastUsedVoucher->count ?: 0 }}</span>
+                    </div>
+                </div>
+            </div>         
+        </div>
     </div>
 </div>
 
@@ -121,6 +154,19 @@
         backgroundColor: 'rgb(0,123,255)',
         borderColor: 'rgb(0,123,255)',
         data: sales_val,
+      }]
+    };
+
+    var services_lbl =  {{ Js::from($services_lbl) }};
+    var services_val =  {{ Js::from($services_val) }};
+
+    const servicesData = {
+      labels: services_lbl,
+      datasets: [{
+        label: 'Services Booked Last 30 Days',
+        backgroundColor: 'rgb(0,123,255)',
+        borderColor: 'rgb(0,123,255)',
+        data: services_val,
       }]
     };
 
@@ -175,6 +221,35 @@
       }
     };
 
+    const servicesConfig = {
+      type: 'bar',
+      data: servicesData,
+      options: {
+        legend: {
+            display: false
+        },
+        title: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    callback: function (value) { if (Number.isInteger(value)) { return value; } },
+                    stepSize: 1
+                }
+            }]
+        },
+        tooltips: {
+            callbacks: {
+                label: function(tooltipItem, data) {
+                    return tooltipItem.yLabel;
+                }
+            }
+        }
+      }
+    };
+
     const bookingsLast30Days = new Chart(
       document.getElementById('bookingsLast30Days'),
       bookingsConfig
@@ -183,6 +258,11 @@
     const salesLast30Days = new Chart(
       document.getElementById('salesLast30Days'),
       salesConfig
+    );
+
+    const servicesLast30Days = new Chart(
+      document.getElementById('servicesLast30Days'),
+      servicesConfig
     );
 
 </script>

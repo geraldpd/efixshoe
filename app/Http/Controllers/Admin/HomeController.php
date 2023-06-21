@@ -53,6 +53,34 @@ class HomeController extends Controller
         $sales_lbl = $salesPerDay->keys();
         $sales_val = $salesPerDay->values();
 
-        return view('admin.home', compact('bookings', 'services', 'pmethods', 'vouchers', 'bookings_lbl', 'bookings_val', 'sales_lbl', 'sales_val'));
+        $endDate = Carbon::now();
+        $bookingCounts = Service::leftJoin('booking_item_service', 'services.id', '=', 'booking_item_service.service_id')
+            ->leftJoin('booking_items', 'booking_item_service.booking_item_id', '=', 'booking_items.id')
+            ->leftJoin('bookings', 'booking_items.booking_id', '=', 'bookings.id')
+            ->whereBetween('bookings.created_at', [$date, $endDate])
+            ->select('services.name', DB::raw('COUNT(bookings.id) as count'))
+            ->groupBy('services.name')
+            ->get();
+
+        $services_lbl = $bookingCounts->pluck('name')->toArray();
+        $services_val = $bookingCounts->pluck('count')->toArray();
+
+        $mostUsedVoucher = PaymentDetail::select('voucher_code', DB::raw("COUNT(*) as count"))
+            ->where('created_at', '>=', $date)
+            ->where('voucher_code', '<>', null)
+            ->groupBy('voucher_code')
+            ->orderBy('count', 'desc')
+            ->orderBy('voucher_code', 'asc')
+            ->first();
+
+        $leastUsedVoucher = PaymentDetail::select('voucher_code', DB::raw("COUNT(*) as count"))
+            ->where('created_at', '>=', $date)
+            ->where('voucher_code', '<>', null)
+            ->groupBy('voucher_code')
+            ->orderBy('count', 'asc')
+            ->orderBy('voucher_code', 'asc')
+            ->first();
+
+        return view('admin.home', compact('bookings', 'services', 'pmethods', 'vouchers', 'bookings_lbl', 'bookings_val', 'sales_lbl', 'sales_val', 'services_lbl', 'services_val', 'mostUsedVoucher', 'leastUsedVoucher'));
     }
 }
