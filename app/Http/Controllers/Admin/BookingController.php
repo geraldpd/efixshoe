@@ -84,6 +84,10 @@ class BookingController extends Controller
      */
     public function update(Request $request, Booking $booking)
     {
+        if( !$request->status ){
+            return redirect()->back()->with('message', 'No Action Required');
+        }
+
         $booking->status = $request->status;
 
         if( $request->status == 'DECLINED' ){

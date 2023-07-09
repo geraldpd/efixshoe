@@ -252,10 +252,10 @@ return [
     |
     */
 
-    'use_route_url' => false,
-    'dashboard_url' => 'home',
-    'logout_url' => 'admin/logout',
-    'login_url' => 'admin/login',
+    'use_route_url' => true,
+    'dashboard_url' => 'admin.login',
+    'logout_url' => 'admin.logout',
+    'login_url' => 'admin.login',
     'register_url' => null,
     'password_reset_url' => null,
     'password_email_url' => null,
